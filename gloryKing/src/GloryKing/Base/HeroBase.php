@@ -2,6 +2,7 @@
 namespace GloryKing\Base;
 
 use GloryKing\Model\Hero;
+use GloryKing\Model\HeroType;
 
 /**
  * 英雄模型操作基础类
@@ -14,43 +15,44 @@ use GloryKing\Model\Hero;
 class HeroBase extends Base
 {
     /**
-     * 构造函数
-     */
-    public function __construct()
-    {
-        //设置模型
-        $this->setModel(new Hero());
-    }
-
-    /**
-     * 添加一个英雄
+     * 根据类型获取英雄
      *
-     * @param $params
-     * @return 模型对象
+     * @param array $condition
+     * @return mixed
      * @author jiangxianli
-     * @created_at 2017-04-20 15:40:09
+     * @created_at 2017-04-20 17:33:12
      */
-    public function addHero($params)
+    public static function getHeroByType($condition = [])
     {
-        $hero = $this->getModel();
+        //类型ID
+        $type_id = array_get($condition, 'type_id', 0);
 
-        $hero->fill($params);
-        $hero->save();
+        //获取英雄
+        $hero = Hero::whereHas('heroType', function ($query) use ($type_id) {
+            $query->where('hero_type_id', $type_id);
+        })->get();
 
         return $hero;
     }
 
     /**
-     * 删除一个英雄
+     * 获取类型及类型下的英雄
      *
-     * @param $hero_id
+     * @param array $condition
+     * @return mixed
      * @author jiangxianli
-     * @created_at 2017-04-20 15:41:52
+     * @created_at 2017-04-20 17:43:13
      */
-    public function deleteHero($hero_id)
+    public static function getTypeHeroList($condition = [])
     {
-        $hero = $this->getModel();
+        $hero = HeroType::with([
+            'hero' => function ($query) {
+                $query->select([
+                    'id', 'name', 'image_id'
+                ]);
+            }
+        ])->enable()->orderBy('sort', 'desc')->get();
 
-        $hero->whereId($hero_id)->delete();
+        return $hero;
     }
 }

@@ -18,6 +18,7 @@ class CreateTableWzElementTable extends Migration
             $table->string('unique_id')->default('')->comment('唯一ID');
             $table->string('url')->default('')->comment('素材地址');
             $table->string('title')->default('')->comment('素材标题');
+            $table->integer('hero_id')->default(0)->comment('英雄ID');
             $table->integer('play_num')->default(0)->comment('播放次数');
             $table->integer('raise_num')->default(0)->comment('点赞次数');
             $table->tinyInteger('disabled')->default(0)->comment('是否显示(1:显示 0:隐藏)');

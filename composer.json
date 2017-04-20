@@ -20,7 +20,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "GloryKing\\": "glory/king/GloryKing/"
+            "GloryKing\\": "gloryking/src/GloryKing/",
+            "Library\\": "gloryking/src/Library/"
         }
     },
     "autoload-dev": {

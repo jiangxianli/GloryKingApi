@@ -21,4 +21,16 @@ class Element extends Base
      * @var string
      */
     protected $table = 'wz_element';
+
+    /**
+     * 查询显示的
+     *
+     * @param $query
+     * @author jiangxianli
+     * @created_at 2017-04-20 17:04:01
+     */
+    public function scopeEnable($query)
+    {
+        $query->where('disabled', 0);
+    }
 }
