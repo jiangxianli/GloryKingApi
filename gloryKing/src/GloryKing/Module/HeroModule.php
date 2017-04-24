@@ -5,6 +5,7 @@ use GloryKing\Base\HeroBase;
 use GloryKing\Base\HeroTypeBase;
 use Library\FormValidator\Admin\AddHero;
 use Library\FormValidator\Admin\AddHeroType;
+use Library\FormValidator\Admin\EditHero;
 use Library\FormValidator\FormValidator;
 
 /**
@@ -101,7 +102,30 @@ class HeroModule extends Module
                     HeroBase::addHero($condition);
                 });
                 break;
+            case 'edit':
+                $form_validator = new FormValidator(new EditHero(), $condition);
+                if ($form_validator->isFailed()) {
+                    return $form_validator->getError();
+                }
+
+                return self::dbTransaction(function () use ($condition) {
+                    HeroBase::editHero($condition);
+                });
+                break;
         }
+    }
+
+    /**
+     * 获取英雄详细信息
+     *
+     * @param $hero_id
+     * @return mixed
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:40:49
+     */
+    public static function getHeroDetail($hero_id)
+    {
+        return HeroBase::getHeroDetail($hero_id);
     }
 
 }

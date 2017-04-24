@@ -12,8 +12,7 @@ $(function () {
         postForm: function () {
 
             //表单校验添加监听
-            $('#add-hero-type-form').parsley('addListener', {
-
+            $('#edit-hero-form').parsley('addListener', {
                 //表单提交之后
                 onFormSubmit: function (isFormValid, event, ParsleyForm) {
                     //先阻止表单的提交时间
@@ -24,7 +23,7 @@ $(function () {
                     }
 
                     //获取表单
-                    var form = $('#add-hero-type-form');
+                    var form = $('#edit-hero-form');
                     //请求URL
                     var url = form.attr('action');
                     //请求方式
@@ -36,7 +35,18 @@ $(function () {
                     });
                     params.disabled = params.disabled == 'on' ? 1 : 0; //disabled参数值转换
 
+                    //关联的类型
+                    var type_id_arr = [];
+                    $('.chosen-select option:selected').each(function () {
+                        type_id_arr.push(this.value)
+                    });
+                    params.type_id = type_id_arr;
+
+                    var image_id = $('.upload-file-container input[name=image_id]').val();
+                    params.image_id = image_id;
+
                     $.ajaxFun(url, method, params, function (response) {
+                        console.log('back')
                         window.history.go(-1);
                     });
                 }

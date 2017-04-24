@@ -31,12 +31,12 @@ $(function () {
                             allowToastClose: false,
                             bgColor: '#f05050'
                         });
-                        if (success_fun) {
-                            success_fun(response)
-                        }
-                    } else {
                         if (error_fun) {
                             error_fun(response)
+                        }
+                    } else {
+                        if (success_fun) {
+                            success_fun(response)
                         }
                     }
 
@@ -68,7 +68,9 @@ $(function () {
             var _default = {
                 uploadUrl:'',
                 uploadParams:{},
-                uploadExtensions:['jpg','png','gif']
+                uploadExtensions:['jpg','png','gif'],
+                defaultUrl:'',
+                defaultId:0,
             };
 
             _default = $.extend(_default,options);
@@ -77,8 +79,9 @@ $(function () {
             //上传器元素添加到对应容器中
             var html = $('<div class="upload-container '+version+'">'+
                 '<div class="upload-image">'+
+                ( _default.defaultUrl ? ('<img src="'+_default.defaultUrl+'" />') : '' ) +
                 '</div>'+
-                '<input type="hidden" name="image_id" value="0" /> '+
+                '<input type="hidden" name="image_id" value="'+_default.defaultId+'" /> '+
                 '<div class="upload-tool">'+
                 '<button class="btn btn-success pull-left col-sm-12 upload-btn"><input type="file" name="file">上传</input></button>'+
                 // '<button class="btn btn-danger pull-right col-sm-6 hidden delete-btn">删除</button>'+

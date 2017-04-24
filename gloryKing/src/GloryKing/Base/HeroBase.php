@@ -89,4 +89,60 @@ class HeroBase extends Base
 
         return $hero;
     }
+
+    /**
+     * 编辑英雄
+     *
+     * @param array $condition
+     * @return ErrorMessage
+     * @author jiangxianli
+     * @created_at 2017-04-24 17:29:25
+     */
+    public static function editHero($condition = [])
+    {
+        $id   = array_get($condition, 'id', 0);
+        $name = array_get($condition, 'name', '');
+
+        //查找原记录
+        $hero = Hero::find($id);
+        if (!$hero) {
+            return new ErrorMessage('11001');
+        }
+
+        //检查相同名称是否存在
+        $check_exist = Hero::where('name', $name)->where('id', '!=', $id)->first();
+        if ($check_exist) {
+            return new ErrorMessage('11000');
+        }
+
+        $hero->fill($condition);
+        $hero->save();
+
+        $type_id = array_get($condition, 'type_id', []);
+        $hero->heroType()->sync($type_id);
+
+        return $hero;
+    }
+
+    /**
+     * 获取英雄详细信息
+     *
+     * @param $hero_id
+     * @return mixed
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:40:49
+     */
+    public static function getHeroDetail($hero_id)
+    {
+        $hero = Hero::with([
+            'heroTypeRelation' => function ($query) {
+                $query->select(['*']);
+            },
+            'image'            => function ($query) {
+                $query->select(['*']);
+            }
+        ])->where('id', $hero_id)->first();
+
+        return $hero;
+    }
 }

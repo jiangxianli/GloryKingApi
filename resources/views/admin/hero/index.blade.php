@@ -48,7 +48,7 @@
                                             <a href="track-detail.html"><img src="{{ $item->getImageSrc() }}" alt="" class="r r-2x img-full"></a>
                                         </div>
                                         <div class="padder-v">
-                                            <a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">{{ $item->name }}</a>
+                                            <a href="{{ action('Admin\HeroController@getEditHero',['id'=>$item->id])  }}" class="text-ellipsis">{{ $item->name }}</a>
                                             {{--<a href="track-detail.html" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">Miaow</a>--}}
                                         </div>
                                     </div>

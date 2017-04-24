@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/', ['as' => 'admin.hero', 'uses' => 'HeroController@getHeroList']);
         Route::get('add', 'HeroController@getAddHero');
         Route::post('add', 'HeroController@postAddHero');
+        Route::get('{id}/edit', 'HeroController@getEditHero');
+        Route::post('{id}/edit', 'HeroController@postEditHero');
     });
 
     Route::group(['prefix' => 'hero-type'], function () {

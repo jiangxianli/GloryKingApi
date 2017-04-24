@@ -45,4 +45,24 @@ class Handler
             'msg'  => ''
         ];
     }
+
+    /**
+     * 分页数据转成数组格式
+     *
+     * @param $items
+     * @param $collection
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-24 17:57:05
+     */
+    public static function pageData2Array($items, $collection)
+    {
+        return [
+            'total'        => $collection->total(),
+            'current_page' => $collection->currentPage(),
+            'per_page'     => $collection->perPage(),
+            'last_page'    => $collection->lastPage(),
+            'rows'         => $items
+        ];
+    }
 }

@@ -62,4 +62,47 @@ class HeroController extends Controller
 
         return response()->json($response);
     }
+
+    /**
+     * 编辑英雄界面
+     *
+     * @param Request $request
+     * @param $hero_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:43:59
+     */
+    public function getEditHero(Request $request, $hero_id)
+    {
+        $params = $request->all();
+
+        //获取英雄信息
+        $hero = AdminHandler::getHeroDetail($hero_id);
+
+        if (!$hero) {
+            App::abort(404);
+        }
+
+        $hero_type = AdminHandler::getAllHeroType($params);
+
+        return view('admin.hero.edit', compact('hero', 'hero_type'));
+    }
+
+    /**
+     * 编辑英雄资料
+     *
+     * @param Request $request
+     * @param $hero_id
+     * @return \Illuminate\Http\JsonResponse
+     * @author jiangxianli
+     * @created_at 2017-04-24 17:30:34
+     */
+    public function postEditHero(Request $request, $hero_id)
+    {
+        $params = $request->all();
+
+        $response = ApiHandler::heroOperate(array_merge($params, ['id' => $hero_id]), 'edit');
+
+        return response()->json($response);
+    }
 }

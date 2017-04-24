@@ -46,7 +46,7 @@ $(function () {
                     params.image_id = image_id;
 
                     $.ajaxFun(url, method, params, function (response) {
-
+                        window.history.go(-1);
                     });
                 }
             });

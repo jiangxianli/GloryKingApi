@@ -52,4 +52,17 @@ class AdminHandler extends Handler
     {
         return HeroModule::getHeroList($condition);
     }
+
+    /**
+     * 获取英雄详细信息
+     *
+     * @param $hero_id
+     * @return mixed
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:40:49
+     */
+    public static function getHeroDetail($hero_id)
+    {
+        return HeroModule::getHeroDetail($hero_id);
+    }
 }

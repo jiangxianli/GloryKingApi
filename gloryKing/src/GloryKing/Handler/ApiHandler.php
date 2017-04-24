@@ -40,7 +40,17 @@ class ApiHandler extends Handler
      */
     public static function getHeroList($condition = [])
     {
-        $response = HeroModule::getHeroList($condition);
+        $collection = HeroModule::getHeroList($condition);
+
+        $items = [];
+        foreach ($collection as $item) {
+            $items[] = [
+                'hero_id'   => $item->id,
+                'hero_name' => $item->name,
+                'image_url' => $item->getImageSrc(),
+            ];
+        }
+        $response = self::pageData2Array($items, $collection);
 
         return self::apiResponse($response);
     }
