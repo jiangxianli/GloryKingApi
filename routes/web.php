@@ -26,6 +26,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('{id}/edit', 'HeroController@postEditHero');
     });
 
+    Route::group(['prefix' => 'element'], function () {
+        Route::get('/', 'ElementController@getIndex');
+        Route::get('add', 'ElementController@getAddElement');
+        Route::post('add', 'ElementController@postAddElement');
+//        Route::get(、'{id}/edit', 'ElementController@getEditHero');
+//        Route::post('{id}/edit', 'ElementController@postEditHero');
+    });
+
     Route::group(['prefix' => 'hero-type'], function () {
         Route::get('add', 'HeroTypeController@getAdd');
         Route::post('add', 'HeroTypeController@postAdd');

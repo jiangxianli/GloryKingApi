@@ -38,6 +38,9 @@ class HeroModule extends Module
                 //获取类型及类型下的英雄
                 return HeroBase::getTypeHeroList($condition);
                 break;
+            case 'all_hero':
+                return HeroBase::getAllHero($condition);
+                break;
             default:
                 return [];
 

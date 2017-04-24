@@ -23,6 +23,20 @@ class Element extends Base
     protected $table = 'wz_element';
 
     /**
+     * 指定可填充字段
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'url',
+        'hero_id',
+        'image_id',
+        'sort',
+        'disabled'
+    ];
+
+    /**
      * 查询显示的
      *
      * @param $query
@@ -32,5 +46,17 @@ class Element extends Base
     public function scopeEnable($query)
     {
         $query->where('disabled', 0);
+    }
+
+    /**
+     * BelongsTo Hero
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author jiangxianli
+     * @created_at 2017-04-24 19:16:10
+     */
+    public function hero()
+    {
+        return $this->belongsTo(__NAMESPACE__ . '\Hero', 'hero_id', 'id');
     }
 }

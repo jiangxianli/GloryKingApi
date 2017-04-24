@@ -65,4 +65,33 @@ class AdminHandler extends Handler
     {
         return HeroModule::getHeroDetail($hero_id);
     }
+
+    /**
+     * 素材操作
+     *
+     * @param $condition
+     * @param $operate
+     * @return \Library\ErrorMessage\ErrorMessage|mixed
+     * @author jiangxianli
+     * @created_at 2017-04-24 18:34:11
+     */
+    public static function elementOperate($condition, $operate)
+    {
+        $response = ElementModule::elementOperate($condition, $operate);
+
+        return self::apiResponse($response);
+    }
+
+    /**
+     * 获取元素列表
+     *
+     * @param $condition
+     * @return array|mixed
+     * @author jiangxianli
+     * @created_at 2017-04-24 19:09:46
+     */
+    public static function getElements($condition)
+    {
+        return ElementModule::getElements($condition);
+    }
 }

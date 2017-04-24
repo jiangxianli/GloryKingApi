@@ -33,7 +33,7 @@ $(function () {
                     $.each(form.serializeArray(), function () {
                         params[this.name] = this.value;
                     });
-                    params.disabled = params.disabled == 'on' ? 1 : 0; //disabled参数值转换
+                    params.disabled = params.disabled == 'on' ? 0 : 1; //disabled参数值转换
 
                     //关联的类型
                     var type_id_arr = [];

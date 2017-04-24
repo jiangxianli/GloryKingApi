@@ -4,9 +4,9 @@
             <i class="icon-list"></i>
         </a>
         <a href="index.html" class="navbar-brand text-lt">
-            <i class="icon-earphones"></i>
-            <img src="images/logo.png" alt="." class="hide">
-            <span class="hidden-nav-xs m-l-sm">Musik</span>
+            <i class="icon-game-controller"></i>
+            <img src="/images/logo.png" alt="." class="hide">
+            <span class="hidden-nav-xs m-l-sm">王者荣耀视频</span>
         </a>
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
             <i class="icon-settings"></i>
@@ -68,7 +68,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="images/a0.png" alt="...">
+                <img src="/images/a0.png" alt="...">
               </span>
                     John.Smith <b class="caret"></b>
                 </a>

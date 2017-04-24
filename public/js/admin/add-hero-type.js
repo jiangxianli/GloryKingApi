@@ -34,7 +34,7 @@ $(function () {
                     $.each(form.serializeArray(), function () {
                         params[this.name] = this.value;
                     });
-                    params.disabled = params.disabled == 'on' ? 1 : 0; //disabled参数值转换
+                    params.disabled = params.disabled == 'on' ? 0 : 1; //disabled参数值转换
 
                     $.ajaxFun(url, method, params, function (response) {
                         window.history.go(-1);

@@ -46,6 +46,21 @@ class HeroBase extends Base
     }
 
     /**
+     * 获取所有的英雄
+     *
+     * @param array $condition
+     * @return mixed
+     * @author jiangxianli
+     * @created_at 2017-04-24 18:21:19
+     */
+    public static function getAllHero($condition = [])
+    {
+        $hero = Hero::enable()->get();
+
+        return $hero;
+    }
+
+    /**
      * 获取类型及类型下的英雄
      *
      * @param array $condition
