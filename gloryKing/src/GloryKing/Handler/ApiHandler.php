@@ -1,6 +1,7 @@
 <?php
 namespace GloryKing\Handler;
 
+use GloryKing\Module\CommonModule;
 use GloryKing\Module\ElementModule;
 use GloryKing\Module\HeroModule;
 
@@ -40,6 +41,53 @@ class ApiHandler extends Handler
     public static function getHeroList($condition = [])
     {
         $response = HeroModule::getHeroList($condition);
+
+        return self::apiResponse($response);
+    }
+
+    /**
+     * 英雄类型操作
+     *
+     * @param array $condition
+     * @param string $operate
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-21 16:01:27
+     */
+    public static function heroTypeOperate($condition = [], $operate = '')
+    {
+        $response = HeroModule::heroTypeOperate($condition, $operate);
+
+        return self::apiResponse($response);
+    }
+
+    /**
+     * 上传图片
+     *
+     * @param $file
+     * @return mixed
+     * @author jiangxianli
+     * @created_at 2017-04-21 17:44:35
+     */
+    public static function uploadImage($file)
+    {
+        $response = CommonModule::uploadImage($file);
+
+        return self::apiResponse($response);
+    }
+
+    /**
+     * 英雄操作
+     *
+     * @param array $condition
+     * @param string $operate
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-24 14:59:41
+     */
+    public static function heroOperate($condition = [], $operate = '')
+    {
+        $response = HeroModule::heroOperate($condition, $operate);
 
         return self::apiResponse($response);
     }

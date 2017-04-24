@@ -55,6 +55,44 @@ class Hero extends Base
      */
     public function heroType()
     {
-        return $this->hasMany(__NAMESPACE__ . '\HeroType', 'hero_id', 'id');
+        return $this->belongsToMany(__NAMESPACE__ . '\HeroType', HeroTypeRelation::getTableName(), 'hero_id', 'hero_type_id');
+    }
+
+    /**
+     * HasMany HeroTypeRelation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:14:52
+     */
+    public function heroTypeRelation()
+    {
+        return $this->hasMany(__NAMESPACE__ . '\HeroTypeRelation', 'hero_id', 'id');
+    }
+
+    /**
+     * BelongsTo Image
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:15:33
+     */
+    public function image()
+    {
+        return $this->belongsTo(__NAMESPACE__ . '\Image', 'image_id', 'id');
+    }
+
+    /**
+     * 获取图片地址
+     *
+     * @return string
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:18:22
+     */
+    public function getImageSrc()
+    {
+        $image = $this->image;
+
+        return $image ? $image->url : '';
     }
 }

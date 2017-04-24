@@ -23,6 +23,17 @@ class HeroType extends Base
     protected $table = 'wz_hero_type';
 
     /**
+     * 指定可填充字段
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'sort',
+        'disabled'
+    ];
+
+    /**
      * 查询显示的
      *
      * @param $query

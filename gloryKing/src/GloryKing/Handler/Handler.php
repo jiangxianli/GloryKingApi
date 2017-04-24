@@ -28,7 +28,7 @@ class Handler
             return $response->formatError();
         }
 
-        $data = [];
+        $data = $response;
         if ($response && $response instanceof Paginator) {
             $data = [
                 'total'        => $response->total(),

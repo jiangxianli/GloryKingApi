@@ -21,4 +21,15 @@ class Image extends Base
      * @var string
      */
     protected $table = 'wz_image';
+
+    /**
+     * 指定可填充字段
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'url',
+        'path',
+        'extension',
+    ];
 }
