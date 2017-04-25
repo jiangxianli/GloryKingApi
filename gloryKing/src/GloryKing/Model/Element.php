@@ -28,6 +28,7 @@ class Element extends Base
      * @var array
      */
     protected $fillable = [
+        'from_url',
         'title',
         'url',
         'hero_id',

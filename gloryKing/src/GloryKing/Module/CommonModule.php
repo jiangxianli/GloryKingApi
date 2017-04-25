@@ -60,17 +60,14 @@ class CommonModule extends Module
         $page_content = mb_convert_encoding($page_content, 'utf-8', 'GBK,UTF-8,ASCII');
         $html         = SimpleHtml::str_get_html($page_content);
 
+        $url       = '';
+        $title     = '';
+        $image_src = '';
+
         if (starts_with($from_url, 'https://m.v.qq.com')) {
             //获取视频结点
             $video_node = $html->find('#tenvideo_video_player_0', 0);
-            $src        = $video_node ? $video_node->src : '';
-            if (!$src) {
-                return [];
-            }
-
-            $response = [
-                'url' => $src
-            ];
+            $url        = $video_node ? $video_node->src : '';
 
             //获取封面图结点
             $video_node = $html->find('.tvp_poster_img', 0);
@@ -79,11 +76,40 @@ class CommonModule extends Module
                 //匹配封面图地址
                 $matched = preg_match('/(https|http)?:\/\/[^\s]+\.(jpg|png|gif|jpeg)/', $style, $matches);
                 if ($matched && $matches) {
-                    $response['image'] = ImageBase::saveInternetImage($matches[0]);
+                    $image_src = $matches[0];
                 }
             }
-            return $response;
+        } elseif (starts_with($from_url, 'http://video.duowan.cn')) {
+            //获取视频结点
+            $video_node = $html->find('#player video', 0);
+            $url        = $video_node ? $video_node->src : '';
+
+            //获取封面图结点
+            $image_src = $video_node ? $video_node->poster : '';
+
+            $title_node = $html->find('.video-title h1', 0);
+            $title      = $title_node ? $title_node->innertext : '';
+
+        } else {
+            return new ErrorMessage('12001');
         }
+
+        if (!$url) {
+            return new ErrorMessage('12002');
+        }
+
+        $response = [
+            'url' => $url
+        ];
+
+        $image             = ImageBase::saveInternetImage($image_src);
+        $response['image'] = $image;
+
+        if ($title) {
+            $response['title'] = $title;
+        }
+
+        return $response;
         //https://m.v.qq.com/x/cover/9/9ud9svo40zvaxlb.html?vid=v0396t870fu
     }
 }

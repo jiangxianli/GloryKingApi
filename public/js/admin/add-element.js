@@ -74,6 +74,10 @@ $(function () {
                             'defaultId': image.id,
                         });
                     }
+
+                    if (response.data.title) {
+                        $('input[name=title]').val(response.data.title)
+                    }
                 });
             });
 
