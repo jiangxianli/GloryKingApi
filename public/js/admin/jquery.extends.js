@@ -87,7 +87,7 @@ $(function () {
                 // '<button class="btn btn-danger pull-right col-sm-6 hidden delete-btn">删除</button>'+
                 '</div>'+
                 '</div>');
-            element.append(html);
+            element.html(html);
 
             //上传监听
             html.find('.upload-btn input[type=file]').ajaxfileupload({

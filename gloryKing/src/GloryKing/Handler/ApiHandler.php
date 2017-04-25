@@ -118,8 +118,18 @@ class ApiHandler extends Handler
         return self::apiResponse($response);
     }
 
+    /**
+     * 解析视频地址
+     *
+     * @param $from_url
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-25 14:43:31
+     */
     public static function parseVideoUrl($from_url)
     {
+        $response = CommonModule::parseVideoUrl($from_url);
 
+        return self::apiResponse($response);
     }
 }

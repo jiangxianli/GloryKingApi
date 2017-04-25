@@ -41,5 +41,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['prefix' => 'common'], function () {
         Route::post('upload-image', 'CommonController@postUploadImage');
+        Route::post('parse-video-url', 'CommonController@postParseVideoUrl');
     });
+});
+
+
+Route::get('test', function () {
+
+
 });
