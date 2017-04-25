@@ -47,4 +47,12 @@ class CommonModule extends Module
         ];
         return ImageBase::addImage($params);
     }
+
+    public static function parseVideoUrl($from_url)
+    {
+        if (starts_with($from_url, 'https://m.v.qq.com')) {
+
+        }
+        //https://m.v.qq.com/x/cover/9/9ud9svo40zvaxlb.html?vid=v0396t870fu
+    }
 }

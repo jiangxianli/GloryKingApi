@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -14,6 +13,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        InitHero::class
     ];
 
     /**

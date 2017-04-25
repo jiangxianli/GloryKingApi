@@ -101,4 +101,9 @@ class ApiHandler extends Handler
 
         return self::apiResponse($response);
     }
+
+    public static function parseVideoUrl($from_url)
+    {
+
+    }
 }

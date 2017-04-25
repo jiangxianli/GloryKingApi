@@ -20,4 +20,11 @@ class CommonController extends Controller
     {
         return ApiHandler::uploadImage($request->file('file'));
     }
+
+    public function postParseVideoUrl(Request $request)
+    {
+        $from_url = $request->get('from_url');
+
+
+    }
 }

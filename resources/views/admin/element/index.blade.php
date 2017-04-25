@@ -13,6 +13,7 @@
                         <option value="1">全部删除</option>
                     </select>
                     <button class="btn btn-sm btn-default">批量操作</button>
+                    <a href="{{ action('Admin\ElementController@getAddElement') }}" class="btn btn-sm btn-default">新增视频</a>
                 </div>
                 <div class="col-sm-4 m-b-xs">
                     {{--<div class="btn-group" data-toggle="buttons">--}}
