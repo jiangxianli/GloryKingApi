@@ -4,6 +4,7 @@ namespace GloryKing\Handler;
 use GloryKing\Module\CommonModule;
 use GloryKing\Module\ElementModule;
 use GloryKing\Module\HeroModule;
+use Library\Helper;
 
 /**
  * Api接口处理器
@@ -47,10 +48,25 @@ class ApiHandler extends Handler
             $items[] = [
                 'hero_id'   => $item->id,
                 'hero_name' => $item->name,
-                'image_url' => $item->getImageSrc(),
+                'image_url' => Helper::fullUrl($item->getImageSrc()),
             ];
         }
         $response = self::pageData2Array($items, $collection);
+
+        return self::apiResponse($response);
+    }
+
+    /**
+     * 获取所有的英雄类型
+     *
+     * @param array $condition
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-25 14:19:12
+     */
+    public static function getHeroTypeList($condition = [])
+    {
+        $response = HeroModule::getAllHeroType($condition);
 
         return self::apiResponse($response);
     }
