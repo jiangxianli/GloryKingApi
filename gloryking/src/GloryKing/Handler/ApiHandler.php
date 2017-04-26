@@ -38,7 +38,7 @@ class ApiHandler extends Handler
                 if (ErrorMessage::isError($response)) {
                     return $response;
                 }
-                $response = array_map(function ($item) {
+                $response->transform(function ($item) {
                     return [
                         'unique_id' => $item->unique_id,
                         'url'       => $item->url,
@@ -47,7 +47,7 @@ class ApiHandler extends Handler
                         'play_num'  => $item->play_num,
                         'raise_num' => $item->raise_num,
                     ];
-                }, $response->items());
+                });
 
                 break;
             case 'detail':
@@ -96,7 +96,7 @@ class ApiHandler extends Handler
         $by = array_get($condition, 'by', '');
         switch ($by) {
             case 'type_id':
-                $response = $response->map(function ($item) {
+                $response->transform(function ($item) {
                     return [
                         'hero_id'   => $item->id,
                         'hero_name' => $item->name,
@@ -105,7 +105,7 @@ class ApiHandler extends Handler
                 });
                 break;
             case 'type_hero':
-                $response = $response->map(function ($hero_type) {
+                $response->transform(function ($hero_type) {
                     $hero = $hero_type->hero->map(function ($hero) {
                         return [
                             'hero_id'   => $hero->id,
