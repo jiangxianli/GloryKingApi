@@ -77,6 +77,11 @@ class InitElement extends Command
                 try {
                     $link = $video_node->href;
                     $link = str_replace('wzry.duowan.com', 'wzry.duowan.cn', $link);
+
+                    $element = Element::where('from_url', $link)->first();
+                    if ($element) {
+                        continue;
+                    }
                     \Log::info('链接:' . $link);
                     $parse = CommonModule::parseVideoUrl($link);
 
