@@ -28,16 +28,15 @@ class ApiHandler extends Handler
      */
     public static function getElementList($condition = [])
     {
-        $response = ElementModule::getElements($condition);
-        if (ErrorMessage::isError($response)) {
-            return $response;
-        }
-
         $by = array_get($condition, 'by', '');
         switch ($by) {
             case 'hot':
             case 'hero':
             case 'all':
+                $response = ElementModule::getElements($condition);
+                if (ErrorMessage::isError($response)) {
+                    return $response;
+                }
                 $response = array_map(function ($item) {
                     return [
                         'unique_id' => $item->unique_id,
@@ -50,7 +49,14 @@ class ApiHandler extends Handler
                 }, $response->items());
 
                 break;
-            case 'unique_id':
+            case 'detail':
+                $response = ElementModule::getElements([
+                    'by'        => 'detail',
+                    'unique_id' => array_get($condition, 'unique_id', 0)
+                ]);
+                if (ErrorMessage::isError($response)) {
+                    return $response;
+                }
                 $response = [
                     'unique_id' => $response->unique_id,
                     'url'       => $response->url,
