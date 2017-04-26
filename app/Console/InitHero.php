@@ -51,7 +51,7 @@ class InitHero extends Command
             'ck'  => '刺客',
             'fs'  => '法师',
             'ss'  => '射手',
-            'zs'  => '射手',
+            'zs'  => '战士',
             'tk'  => '坦克',
             'fz'  => '辅助',
 
