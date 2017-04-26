@@ -54,6 +54,6 @@ class HeroType extends Base
      */
     public function hero()
     {
-        return $this->hasManyThrough(__NAMESPACE__ . '\Hero', 'hero_id', 'hero_type_id', HeroTypeRelation::getTableName());
+        return $this->belongsToMany(__NAMESPACE__ . '\Hero', HeroTypeRelation::getTableName(), 'hero_type_id', 'hero_id');
     }
 }

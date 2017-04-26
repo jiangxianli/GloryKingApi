@@ -73,7 +73,7 @@ class HeroBase extends Base
         $hero = HeroType::with([
             'hero' => function ($query) {
                 $query->select([
-                    'id', 'name', 'image_id'
+                    'wz_hero.id', 'name', 'image_id'
                 ]);
             }
         ])->enable()->orderBy('sort', 'desc')->get();

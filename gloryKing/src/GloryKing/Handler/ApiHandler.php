@@ -4,6 +4,7 @@ namespace GloryKing\Handler;
 use GloryKing\Module\CommonModule;
 use GloryKing\Module\ElementModule;
 use GloryKing\Module\HeroModule;
+use Illuminate\Support\Collection;
 use Library\ErrorMessage\ErrorMessage;
 use Library\Helper;
 
@@ -27,17 +28,18 @@ class ApiHandler extends Handler
      */
     public static function getElementList($condition = [])
     {
+        $response = ElementModule::getElements($condition);
+        if (ErrorMessage::isError($response)) {
+            return $response;
+        }
+
         $by = array_get($condition, 'by', '');
         switch ($by) {
             case 'hot':
             case 'hero':
             case 'all':
-                $response = ElementModule::getElements($condition);
-                if (ErrorMessage::isError($response)) {
-                    return $response;
-                }
-                foreach ($response->items() as &$item) {
-                    $item = [
+                $response = array_map(function ($item) {
+                    return [
                         'unique_id' => $item->unique_id,
                         'url'       => $item->url,
                         'title'     => $item->title,
@@ -45,13 +47,10 @@ class ApiHandler extends Handler
                         'play_num'  => $item->play_num,
                         'raise_num' => $item->raise_num,
                     ];
-                }
+                }, $response->items());
+
                 break;
             case 'unique_id':
-                $response = ElementModule::getElements(['unique_id' => array_get($condition, 'unique_id', 0)]);
-                if (ErrorMessage::isError($response)) {
-                    return $response;
-                }
                 $response = [
                     'unique_id' => $response->unique_id,
                     'url'       => $response->url,
@@ -79,17 +78,41 @@ class ApiHandler extends Handler
      */
     public static function getHeroList($condition = [])
     {
-        $collection = HeroModule::getHeroList($condition);
+        $response = HeroModule::getHeroList($condition);
 
-        $items = [];
-        foreach ($collection as $item) {
-            $items[] = [
-                'hero_id'   => $item->id,
-                'hero_name' => $item->name,
-                'image_url' => Helper::fullUrl($item->getImageSrc()),
-            ];
+        if (ErrorMessage::isError($response)) {
+            return self::apiResponse($response);
         }
-        $response = self::pageData2Array($items, $collection);
+
+        $by = array_get($condition, 'by', '');
+        switch ($by) {
+            case 'type_id':
+                foreach ($response->items() as &$item) {
+                    $item = [
+                        'hero_id'   => $item->id,
+                        'hero_name' => $item->name,
+                        'image_url' => Helper::fullUrl($item->getImageSrc()),
+                    ];
+                }
+                break;
+            case 'type_hero':
+                $response = $response->map(function ($hero_type) {
+                    $hero = $hero_type->hero->map(function ($hero) {
+                        return [
+                            'hero_id'   => $hero->id,
+                            'hero_name' => $hero->name,
+                            'image_url' => Helper::fullUrl($hero->getImageSrc()),
+                        ];
+                    });
+
+                    return [
+                        'name' => $hero_type->name,
+                        'hero' => $hero
+                    ];
+                });
+                break;
+
+        }
 
         return self::apiResponse($response);
     }
