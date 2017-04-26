@@ -52,6 +52,26 @@ class ElementBase extends Base
     }
 
     /**
+     * 根据英雄类型获取素材
+     *
+     * @param array $condition
+     * @return mixed
+     * @author jiangxianli
+     * @created_at 2017-04-20 17:13:59
+     */
+    public static function getElementByTypeId($condition = [])
+    {
+        $type_id = array_get($condition, 'type_id', 0);
+
+        $elements = Element::whereHas('hero.heroTypeRelation', function ($query) use ($type_id) {
+            $query->where('hero_type_id', $type_id);
+        })->orderBy('created_at', 'desc');
+        $elements = self::page($elements, $condition);
+
+        return $elements;
+    }
+
+    /**
      * 获取所有的元素
      *
      * @param array $condition

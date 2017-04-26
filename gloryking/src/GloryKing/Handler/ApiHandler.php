@@ -30,6 +30,7 @@ class ApiHandler extends Handler
     {
         $by = array_get($condition, 'by', '');
         switch ($by) {
+            case 'type':
             case 'hot':
             case 'hero':
             case 'all':
@@ -95,13 +96,13 @@ class ApiHandler extends Handler
         $by = array_get($condition, 'by', '');
         switch ($by) {
             case 'type_id':
-                foreach ($response->items() as &$item) {
-                    $item = [
+                $response = $response->map(function ($item) {
+                    return [
                         'hero_id'   => $item->id,
                         'hero_name' => $item->name,
                         'image_url' => Helper::fullUrl($item->getImageSrc()),
                     ];
-                }
+                });
                 break;
             case 'type_hero':
                 $response = $response->map(function ($hero_type) {

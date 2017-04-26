@@ -37,6 +37,10 @@ class ElementModule extends Module
                 //根据英雄获取素材
                 return ElementBase::getElementByHero($condition);
                 break;
+            case 'type':
+                //根据英雄获取素材
+                return ElementBase::getElementByTypeId($condition);
+                break;
             case 'all':
                 return ElementBase::getAllElement($condition);
                 break;
