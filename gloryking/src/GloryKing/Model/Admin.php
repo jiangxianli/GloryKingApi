@@ -22,7 +22,7 @@ class Admin extends Authenticatable
      *
      * @var string
      */
-    protected $table = 'wz_Admin';
+    protected $table = 'wz_admin';
 
     /**
      * 指定可填充字段

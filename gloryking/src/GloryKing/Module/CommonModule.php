@@ -90,6 +90,16 @@ class CommonModule extends Module
             $title_node = $html->find('.video-title h1', 0);
             $title      = $title_node ? $title_node->innertext : '';
 
+        } elseif (starts_with($from_url, 'http://wzry.duowan.cn/')) {
+            //获取视频结点
+            $video_node = $html->find('#container .art-cont video', 0);
+            $url        = $video_node && $video_node->find('source', 0) ? $video_node->find('source', 0)->src : '';
+
+            //获取封面图结点
+            $image_src = $video_node ? $video_node->poster : '';
+
+            $title_node = $html->find('#container .art-title', 0);
+            $title      = $title_node ? $title_node->innertext : '';
         } else {
             return new ErrorMessage('12001');
         }
