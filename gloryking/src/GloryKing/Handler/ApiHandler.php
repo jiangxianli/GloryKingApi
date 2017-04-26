@@ -202,4 +202,29 @@ class ApiHandler extends Handler
 
         return self::apiResponse($response);
     }
+
+    /**
+     * 素材操作
+     *
+     * @param array $condition
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-26 16:05:24
+     */
+    public static function elementOperate($condition = [])
+    {
+        $by = array_get($condition, 'by', '');
+
+        switch ($by) {
+            case 'add_play_num':
+            case 'add_raise_num':
+                $response = ElementModule::elementOperate($condition, $by);
+                break;
+            default:
+                $response = new ErrorMessage('2003');
+                break;
+        }
+
+        return self::apiResponse($response);
+    }
 }

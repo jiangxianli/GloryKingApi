@@ -28,5 +28,6 @@ Route::group(['namespace' => 'Api'], function () {
     //素材相关接口
     Route::group(['prefix' => 'element'], function () {
         Route::get('/', 'ElementController@postElementList'); //素材列表
+        Route::post('operate', 'ElementController@postElementOperate'); //素材操作
     });
 });

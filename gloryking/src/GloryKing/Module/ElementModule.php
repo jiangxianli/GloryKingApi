@@ -85,6 +85,14 @@ class ElementModule extends Module
                     ElementBase::editElement($condition);
                 });
                 break;
+            case 'add_play_num':
+                $unique_id = array_get($condition, 'unique_id', 0);
+                return ElementBase::incrementByColumn($unique_id, 'play_num');
+                break;
+            case 'add_raise_num':
+                $unique_id = array_get($condition, 'unique_id', 0);
+                return ElementBase::incrementByColumn($unique_id, 'raise_num');
+                break;
         }
     }
 }

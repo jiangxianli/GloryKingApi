@@ -23,4 +23,21 @@ class ElementController extends Controller
 
         return response()->json($response);
     }
+
+    /**
+     * 素材操作
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @author jiangxianli
+     * @created_at 2017-04-26 16:06:11
+     */
+    public function postElementOperate(Request $request)
+    {
+        $params = $request->all();
+
+        $response = ApiHandler::elementOperate($params);
+
+        return response()->json($response);
+    }
 }

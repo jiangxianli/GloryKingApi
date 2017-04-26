@@ -137,6 +137,19 @@ class ElementBase extends Base
     }
 
     /**
+     * 统计项自增
+     *
+     * @param $unique_id
+     * @param $column
+     * @author jiangxianli
+     * @created_at 2017-04-26 16:01:57
+     */
+    public static function incrementByColumn($unique_id, $column)
+    {
+        Element::where('unique_id', $unique_id)->increment($column);
+    }
+
+    /**
      * 根据ID获取素材详情
      *
      * @param array $condition
