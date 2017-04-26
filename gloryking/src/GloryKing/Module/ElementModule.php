@@ -47,6 +47,9 @@ class ElementModule extends Module
             case 'detail':
                 return ElementBase::getElementDetail($condition);
                 break;
+            case 'recommend':
+                return ElementBase::getRecommendElement($condition);
+                return;
             default:
                 return new ErrorMessage('2003');
                 break;

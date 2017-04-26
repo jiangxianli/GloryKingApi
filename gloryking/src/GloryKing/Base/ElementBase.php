@@ -183,5 +183,35 @@ class ElementBase extends Base
         return $element;
     }
 
+    /**
+     * 推荐素材
+     *
+     * @param array $condition
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-26 16:46:43
+     */
+    public static function getRecommendElement($condition = [])
+    {
+        //英雄ID
+        $hero_id = array_get($condition, 'hero_id', 0);
+        //排除项
+        $exclude = array_get($condition, 'exclude', '');
 
+        $exclude_id = explode(',', $exclude);
+
+        $element = Element::where('hero_id', $hero_id);
+
+        if ($exclude) {
+            $element = $element->whereNotIn('unique_id', $exclude_id);
+        }
+
+        $element = $element->orderBy('play_num', 'desc')
+            ->orderBy('raise_num', 'desc')
+            ->orderBy('created_at', 'desc');
+
+        $element = self::page($element, $condition);
+
+        return $element;
+    }
 }

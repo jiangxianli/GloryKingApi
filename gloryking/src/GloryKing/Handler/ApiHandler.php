@@ -33,6 +33,7 @@ class ApiHandler extends Handler
             case 'type':
             case 'hot':
             case 'hero':
+            case 'recommend':
             case 'all':
                 $response = ElementModule::getElements($condition);
                 if (ErrorMessage::isError($response)) {
