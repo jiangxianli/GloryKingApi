@@ -1,8 +1,10 @@
 <?php
 namespace GloryKing\Handler;
 
+use GloryKing\Module\AdminModule;
 use GloryKing\Module\ElementModule;
 use GloryKing\Module\HeroModule;
+use Library\ErrorMessage\ErrorMessage;
 
 /**
  * 管理后台处理器
@@ -93,5 +95,24 @@ class AdminHandler extends Handler
     public static function getElements($condition)
     {
         return ElementModule::getElements($condition);
+    }
+
+    /**
+     * 管理员登录
+     *
+     * @param $condition
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-26 17:29:39
+     */
+    public static function adminLogin($condition)
+    {
+        $response = AdminModule::adminLogin($condition);
+
+        if (!ErrorMessage::isError($response)) {
+            \Auth::login($response);
+        }
+
+        return self::apiResponse($response);
     }
 }

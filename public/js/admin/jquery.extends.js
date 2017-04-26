@@ -26,7 +26,7 @@ $(function () {
 
                     if (response.code != 0) {
                         $.toast({
-                            text: "<strong>" + response.msg + "</strong>",
+                            text: "" + response.msg + "",
                             position: 'bottom-right',
                             allowToastClose: false,
                             bgColor: '#f05050'
@@ -49,7 +49,7 @@ $(function () {
                     }
 
                     $.toast({
-                        text: "<strong>网络错误，请重试!</strong>",
+                        text: "网络错误，请重试!",
                         position: 'bottom-right',
                         allowToastClose: false,
                         bgColor: '#f05050'

@@ -21,6 +21,7 @@ class CreateWzAdminTable extends Migration
             $table->string('password')->default('')->comment('密码');
             $table->rememberToken();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

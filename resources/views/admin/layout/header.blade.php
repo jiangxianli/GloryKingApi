@@ -44,7 +44,7 @@
                         <div class="list-group list-group-alt">
                             <a href="#" class="media list-group-item">
                     <span class="pull-left thumb-sm">
-                      <img src="images/a0.png" alt="..." class="img-circle">
+                      <img src="/images/a0.png" alt="..." class="img-circle">
                     </span>
                                 <span class="media-body block m-b-none">
                       Use awesome animate.css<br>
@@ -70,28 +70,28 @@
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                 <img src="/images/a0.png" alt="...">
               </span>
-                    John.Smith <b class="caret"></b>
+                    {{ \Auth::user()->nick_name }} <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight">
                     <li>
                         <span class="arrow top"></span>
-                        <a href="#">Settings</a>
+                        <a href="#">设置 </a>
                     </li>
                     <li>
-                        <a href="profile.html">Profile</a>
+                        <a href="#">个人信息</a>
                     </li>
                     <li>
                         <a href="#">
                             <span class="badge bg-danger pull-right">3</span>
-                            Notifications
+                            通知
                         </a>
                     </li>
                     <li>
-                        <a href="docs.html">Help</a>
+                        <a href="#">帮助</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="modal.lockme.html" data-toggle="ajaxModal" >Logout</a>
+                        <a href="{{ action('Admin\AdminController@getLogout') }}" data-toggle="ajaxModal" >退出系统</a>
                     </li>
                 </ul>
             </li>

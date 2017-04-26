@@ -1,7 +1,7 @@
 <?php
 
 //管理后台
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin.auth'], function () {
 
     //英雄操作
     Route::group(['prefix' => 'hero'], function () {
@@ -33,3 +33,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::post('parse-video-url', 'CommonController@postParseVideoUrl'); //解析视频地址
     });
 });
+
+Route::get('admin/login', 'Admin\AdminController@getLogin');
+Route::post('admin/login', 'Admin\AdminController@postLogin');
+Route::get('admin/logout', 'Admin\AdminController@getLogout');

@@ -3961,3 +3961,9 @@ fieldset[disabled] .i-checks input + i:before {
   opacity:0;
   position: absolute;
 }
+
+.admin-login-btn{
+  background: none;
+  border: 0;
+  width:80%;
+}
