@@ -143,7 +143,7 @@ class ElementBase extends Base
             }
 
             if ($unique_id) {
-                $query->where('unique_id');
+                $query->where('unique_id', $unique_id);
             }
         })->first();
 

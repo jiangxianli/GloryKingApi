@@ -57,14 +57,16 @@ class ApiHandler extends Handler
                 if (ErrorMessage::isError($response)) {
                     return $response;
                 }
-                $response = [
-                    'unique_id' => $response->unique_id,
-                    'url'       => $response->url,
-                    'title'     => $response->title,
-                    'poster'    => $response->image ? Helper::fullUrl($response->image->url) : '',
-                    'play_num'  => $response->play_num,
-                    'raise_num' => $response->raise_num,
-                ];
+                if ($response) {
+                    $response = [
+                        'unique_id' => $response->unique_id,
+                        'url'       => $response->url,
+                        'title'     => $response->title,
+                        'poster'    => $response->image ? Helper::fullUrl($response->image->url) : '',
+                        'play_num'  => $response->play_num,
+                        'raise_num' => $response->raise_num,
+                    ];
+                }
                 break;
             default:
                 $response = new ErrorMessage('2003');

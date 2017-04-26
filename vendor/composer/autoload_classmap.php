@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddFromUrlToElementTable' => $baseDir . '/database/migrations/2017_04_25_125940_add_from_url_to_element_table.php',
     'App\\Console\\InitHero' => $baseDir . '/app/Console/InitHero.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -1402,6 +1403,7 @@ return array(
     'Library\\FormValidator\\Admin\\AddElement' => $baseDir . '/gloryking/src/Library/FormValidator/Admin/AddElement.php',
     'Library\\FormValidator\\Admin\\AddHero' => $baseDir . '/gloryking/src/Library/FormValidator/Admin/AddHero.php',
     'Library\\FormValidator\\Admin\\AddHeroType' => $baseDir . '/gloryking/src/Library/FormValidator/Admin/AddHeroType.php',
+    'Library\\FormValidator\\Admin\\EditElement' => $baseDir . '/gloryking/src/Library/FormValidator/Admin/EditElement.php',
     'Library\\FormValidator\\Admin\\EditHero' => $baseDir . '/gloryking/src/Library/FormValidator/Admin/EditHero.php',
     'Library\\FormValidator\\FormValidator' => $baseDir . '/gloryking/src/Library/FormValidator/FormValidator.php',
     'Library\\FormValidator\\ValidatorBase' => $baseDir . '/gloryking/src/Library/FormValidator/ValidatorBase.php',
