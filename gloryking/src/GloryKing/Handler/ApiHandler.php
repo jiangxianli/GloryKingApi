@@ -42,6 +42,7 @@ class ApiHandler extends Handler
                 $response->transform(function ($item) {
                     return [
                         'unique_id' => $item->unique_id,
+                        'hero_id'   => $item->hero_id,
                         'url'       => $item->url,
                         'title'     => $item->title,
                         'poster'    => $item->image ? Helper::fullUrl($item->image->url) : '',
