@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="vbox">
-        <section class="panel panel-default">
+        <section class="scrollable  panel panel-default">
             <header class="panel-heading">
                 视频列表
             </header>
@@ -52,13 +52,13 @@
                           </span>
                         </th>
                         <th>播放地址</th>
-                        <th>所属英雄</th>
-                        <th>播放次数</th>
+                        <th width="90">所属英雄</th>
+                        <th width="90">播放次数</th>
                         <th>创建时间</th>
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height:200px;overflow-y: auto;width:100%;">
                     @foreach($element as $item)
                         <tr>
                             <td><label class="checkbox m-n i-checks"><input type="checkbox"
