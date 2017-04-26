@@ -45,7 +45,7 @@ class InitElement extends Command
      */
     public function handle()
     {
-        \DB::statement('truncate table wz_element');
+        //\DB::statement('truncate table wz_element');
 
         //获取英雄数据
         $url          = 'http://wzry.duowan.com/1607/m_331814214726.html';
@@ -73,40 +73,46 @@ class InitElement extends Command
 
             $video_nodes = $html->find('.list-video a');
             foreach ($video_nodes as $video_node) {
-                $link = $video_node->href;
-                $link = str_replace('wzry.duowan.com', 'wzry.duowan.cn', $link);
-                \Log::info('链接:' . $link);
-                $parse = CommonModule::parseVideoUrl($link);
 
-                if (ErrorMessage::isError($parse)) {
-                    \Log::error($parse->formatError());
-                    continue;
+                try {
+                    $link = $video_node->href;
+                    $link = str_replace('wzry.duowan.com', 'wzry.duowan.cn', $link);
+                    \Log::info('链接:' . $link);
+                    $parse = CommonModule::parseVideoUrl($link);
+
+                    if (ErrorMessage::isError($parse)) {
+                        \Log::error($parse->formatError());
+                        continue;
+                    }
+                    \Log::info($parse);
+                    $url   = array_get($parse, 'url', '');
+                    $image = array_get($parse, 'image', '');
+                    $title = array_get($parse, 'title', '');
+
+                    if (!$url || !$title) {
+                        continue;
+                    }
+
+                    $element = Element::where('title', $title)->orWhere('url', $url)->first();
+                    if ($element) {
+                        continue;
+                    }
+
+                    $element           = new Element();
+                    $element->title    = $title;
+                    $element->url      = $url;
+                    $element->from_url = $link;
+                    $element->hero_id  = $hero->id;
+                    $element->image_id = $image ? $image->id : 0;
+                    $element->disabled = 0;
+                    $element->sort     = 1;
+                    $element->save();
+
+                    \Log::info($element);
+
+                } catch (\Exception $exception) {
+                    \Log::error($exception->getMessage());
                 }
-                \Log::info($parse);
-                $url   = array_get($parse, 'url', '');
-                $image = array_get($parse, 'image', '');
-                $title = array_get($parse, 'title', '');
-
-                if (!$url || !$title) {
-                    continue;
-                }
-
-                $element = Element::where('title', $title)->orWhere('url', $url)->first();
-                if ($element) {
-                    continue;
-                }
-
-                $element           = new Element();
-                $element->title    = $title;
-                $element->url      = $url;
-                $element->from_url = $link;
-                $element->hero_id  = $hero->id;
-                $element->image_id = $image ? $image->id : 0;
-                $element->disabled = 0;
-                $element->sort     = 1;
-                $element->save();
-
-                \Log::info($element);
 
             }
 
