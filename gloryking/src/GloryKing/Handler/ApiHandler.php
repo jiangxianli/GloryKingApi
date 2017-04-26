@@ -64,6 +64,7 @@ class ApiHandler extends Handler
                     $response = [
                         'unique_id' => $response->unique_id,
                         'url'       => $response->url,
+                        'hero_id'   => $response->hero_id,
                         'title'     => $response->title,
                         'poster'    => $response->image ? Helper::fullUrl($response->image->url) : '',
                         'play_num'  => $response->play_num,
