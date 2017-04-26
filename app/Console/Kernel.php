@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
-        InitHero::class
+        InitHero::class,
+        InitElement::class
     ];
 
     /**

@@ -48,11 +48,13 @@ class InitHero extends Command
 
         $hero_type_items = [
             'new' => '体验服／新英雄爆料',
-            'fs'  => '法师',
-            'tk'  => '坦克',
             'ck'  => '刺客',
+            'fs'  => '法师',
             'ss'  => '射手',
+            'zs'  => '射手',
+            'tk'  => '坦克',
             'fz'  => '辅助',
+
         ];
         foreach ($hero_type_items as $hero_type_item) {
             $hero_type = HeroType::firstOrCreate(['name' => $hero_type_item]);
@@ -94,6 +96,8 @@ class InitHero extends Command
             $image->save();
 
             $hero->image_id = $image->id;
+            $hero->disabled = 0;
+            $hero->sort     = 1;
             $hero->save();
 
             $type_name_arr = [];
