@@ -3,6 +3,7 @@ namespace GloryKing\Base;
 
 use GloryKing\Model\Element;
 use Library\ErrorMessage\ErrorMessage;
+use Library\Helper;
 
 /**
  * 素材模型操作基础类
@@ -68,7 +69,7 @@ class ElementBase extends Base
     }
 
     /**
-     * 添加英雄
+     * 添加素材
      *
      * @param array $condition
      * @return Hero|ErrorMessage
@@ -86,7 +87,65 @@ class ElementBase extends Base
 
         $element = new Element();
         $element->fill($condition);
+        $element->unique_id = Helper::uuid('v');
         $element->save();
+
+        return $element;
+    }
+
+    /**
+     * 更新素材
+     *
+     * @param array $condition
+     * @return ErrorMessage
+     * @author jiangxianli
+     * @created_at 2017-04-26 10:44:00
+     */
+    public static function editElement($condition = [])
+    {
+        $id = array_get($condition, 'id', 0);
+
+        $element = Element::find($id);
+        if (!$element) {
+            return new ErrorMessage('12003');
+        }
+
+        $element->fill($condition);
+        $element->save();
+
+        return $element;
+    }
+
+    /**
+     * 根据ID获取素材详情
+     *
+     * @param array $condition
+     * @return mixed
+     * @author jiangxianli
+     * @created_at 2017-04-26 10:18:25
+     */
+    public static function getElementDetail($condition = [])
+    {
+        $id        = array_get($condition, 'id', 0);
+        $unique_id = array_get($condition, 'unique_id', 0);
+
+        if (!$id && !$unique_id) {
+            return new ErrorMessage('2003');
+        }
+
+        $element = Element::with([
+            'image' => function ($query) {
+                $query->select(['*']);
+            }
+        ])->where(function ($query) use ($id, $unique_id) {
+            if ($id) {
+                $query->where('id', $id);
+            }
+
+            if ($unique_id) {
+                $query->where('unique_id');
+            }
+        })->first();
 
         return $element;
     }

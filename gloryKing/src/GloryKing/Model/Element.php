@@ -60,4 +60,16 @@ class Element extends Base
     {
         return $this->belongsTo(__NAMESPACE__ . '\Hero', 'hero_id', 'id');
     }
+
+    /**
+     * BelongsTo Image
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @author jiangxianli
+     * @created_at 2017-04-24 16:15:33
+     */
+    public function image()
+    {
+        return $this->belongsTo(__NAMESPACE__ . '\Image', 'image_id', 'id');
+    }
 }

@@ -4,6 +4,7 @@ namespace GloryKing\Handler;
 use GloryKing\Module\CommonModule;
 use GloryKing\Module\ElementModule;
 use GloryKing\Module\HeroModule;
+use Library\ErrorMessage\ErrorMessage;
 use Library\Helper;
 
 /**
@@ -26,7 +27,44 @@ class ApiHandler extends Handler
      */
     public static function getElementList($condition = [])
     {
-        $response = ElementModule::getElements($condition);
+        $by = array_get($condition, 'by', '');
+        switch ($by) {
+            case 'hot':
+            case 'hero':
+            case 'all':
+                $response = ElementModule::getElements($condition);
+                if (ErrorMessage::isError($response)) {
+                    return $response;
+                }
+                foreach ($response->items() as &$item) {
+                    $item = [
+                        'unique_id' => $item->unique_id,
+                        'url'       => $item->url,
+                        'title'     => $item->title,
+                        'poster'    => $item->image ? Helper::fullUrl($item->image->url) : '',
+                        'play_num'  => $item->play_num,
+                        'raise_num' => $item->raise_num,
+                    ];
+                }
+                break;
+            case 'unique_id':
+                $response = ElementModule::getElements(['unique_id' => array_get($condition, 'unique_id', 0)]);
+                if (ErrorMessage::isError($response)) {
+                    return $response;
+                }
+                $response = [
+                    'unique_id' => $response->unique_id,
+                    'url'       => $response->url,
+                    'title'     => $response->title,
+                    'poster'    => $response->image ? Helper::fullUrl($response->image->url) : '',
+                    'play_num'  => $response->play_num,
+                    'raise_num' => $response->raise_num,
+                ];
+                break;
+            default:
+                $response = new ErrorMessage('2003');
+                break;
+        }
 
         return self::apiResponse($response);
     }

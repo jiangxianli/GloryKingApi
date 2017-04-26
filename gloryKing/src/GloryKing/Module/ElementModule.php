@@ -2,7 +2,9 @@
 namespace GloryKing\Module;
 
 use GloryKing\Base\ElementBase;
+use Library\ErrorMessage\ErrorMessage;
 use Library\FormValidator\Admin\AddElement;
+use Library\FormValidator\Admin\EditElement;
 use Library\FormValidator\FormValidator;
 
 /**
@@ -38,8 +40,11 @@ class ElementModule extends Module
             case 'all':
                 return ElementBase::getAllElement($condition);
                 break;
+            case 'detail':
+                return ElementBase::getElementDetail($condition);
+                break;
             default:
-                return [];
+                return new ErrorMessage('2003');
                 break;
         }
     }
@@ -57,7 +62,6 @@ class ElementModule extends Module
     {
         switch ($operate) {
             case 'add':
-                \Log::info('add');
                 $form_validator = new FormValidator(new AddElement(), $condition);
                 if ($form_validator->isFailed()) {
                     return $form_validator->getError();
@@ -65,6 +69,16 @@ class ElementModule extends Module
 
                 return self::dbTransaction(function () use ($condition) {
                     ElementBase::addElement($condition);
+                });
+                break;
+            case 'edit':
+                $form_validator = new FormValidator(new EditElement(), $condition);
+                if ($form_validator->isFailed()) {
+                    return $form_validator->getError();
+                }
+
+                return self::dbTransaction(function () use ($condition) {
+                    ElementBase::editElement($condition);
                 });
                 break;
         }

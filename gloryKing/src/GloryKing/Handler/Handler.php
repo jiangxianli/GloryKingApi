@@ -1,7 +1,7 @@
 <?php
 namespace GloryKing\Handler;
 
-use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\AbstractPaginator;
 use Library\ErrorMessage\ErrorMessage;
 
 /**
@@ -29,7 +29,7 @@ class Handler
         }
 
         $data = $response;
-        if ($response && $response instanceof Paginator) {
+        if ($response && $response instanceof AbstractPaginator) {
             $data = [
                 'total'        => $response->total(),
                 'current_page' => $response->currentPage(),

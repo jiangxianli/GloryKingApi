@@ -13,19 +13,20 @@
                         <option value="1">全部删除</option>
                     </select>
                     <button class="btn btn-sm btn-default">批量操作</button>
-                    <a href="{{ action('Admin\ElementController@getAddElement') }}" class="btn btn-sm btn-default">新增视频</a>
+                    <a href="{{ action('Admin\ElementController@getAddElement') }}"
+                       class="btn btn-sm btn-default">新增视频</a>
                 </div>
                 <div class="col-sm-4 m-b-xs">
                     {{--<div class="btn-group" data-toggle="buttons">--}}
-                        {{--<label class="btn btn-sm btn-default active">--}}
-                            {{--<input type="radio" name="options"> Day--}}
-                        {{--</label>--}}
-                        {{--<label class="btn btn-sm btn-default">--}}
-                            {{--<input type="radio" name="options"> Week--}}
-                        {{--</label>--}}
-                        {{--<label class="btn btn-sm btn-default">--}}
-                            {{--<input type="radio" name="options"> Month--}}
-                        {{--</label>--}}
+                    {{--<label class="btn btn-sm btn-default active">--}}
+                    {{--<input type="radio" name="options"> Day--}}
+                    {{--</label>--}}
+                    {{--<label class="btn btn-sm btn-default">--}}
+                    {{--<input type="radio" name="options"> Week--}}
+                    {{--</label>--}}
+                    {{--<label class="btn btn-sm btn-default">--}}
+                    {{--<input type="radio" name="options"> Month--}}
+                    {{--</label>--}}
                     {{--</div>--}}
                 </div>
                 <div class="col-sm-3">
@@ -41,7 +42,8 @@
                 <table class="table table-striped b-t b-light">
                     <thead>
                     <tr>
-                        <th style="width:20px;"><label class="checkbox m-n i-checks"><input type="checkbox"><i></i></label></th>
+                        <th style="width:20px;"><label class="checkbox m-n i-checks"><input
+                                        type="checkbox"><i></i></label></th>
                         <th class="th-sortable" data-toggle="class">标题
                             <span class="th-sort">
                             <i class="fa fa-sort-down text"></i>
@@ -53,22 +55,26 @@
                         <th>所属英雄</th>
                         <th>播放次数</th>
                         <th>创建时间</th>
-                        <th style="width:30px;"></th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($element as $item)
-                    <tr>
-                        <td><label class="checkbox m-n i-checks"><input type="checkbox" name="post[]"><i></i></label></td>
-                        <td>{{ $item->title }}</td>
-                        <td>{{ $item->url }}</td>
-                        <td>{{ $item->hero->name }}</td>
-                        <td>{{ $item->paly_num }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td>
-                            <a href="#" class="active" data-toggle="class"><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><label class="checkbox m-n i-checks"><input type="checkbox"
+                                                                            name="post[]"><i></i></label></td>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->url }}</td>
+                            <td>{{ $item->hero->name }}</td>
+                            <td>{{ $item->play_num }}</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>
+                                <a href="{{ action('Admin\ElementController@getEditElement',[$item->id]) }}"
+                                   class="active">
+                                    <i class="fa fa-edit text-success text-active"></i>
+                                </a>
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>

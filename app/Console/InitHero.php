@@ -6,6 +6,7 @@ use GloryKing\Model\HeroType;
 use GloryKing\Model\Image;
 use Illuminate\Console\Command;
 use Library\SimpleHtml\CURL;
+use Library\SimpleHtml\SimpleHtml;
 
 class InitHero extends Command
 {
@@ -41,26 +42,39 @@ class InitHero extends Command
      */
     public function handle()
     {
+        \DB::statement('truncate table wz_hero');
+        \DB::statement('truncate table wz_hero_type');
+        \DB::statement('truncate table wz_hero_type_relation');
+
         $hero_type_items = [
-            '1' => '战士',
-            '2' => '法师',
-            '3' => '坦克',
-            '4' => '刺客',
-            '5' => '射手',
-            '6' => '辅助',
+            'new' => '体验服／新英雄爆料',
+            'fs'  => '法师',
+            'tk'  => '坦克',
+            'ck'  => '刺客',
+            'ss'  => '射手',
+            'fz'  => '辅助',
         ];
         foreach ($hero_type_items as $hero_type_item) {
             $hero_type = HeroType::firstOrCreate(['name' => $hero_type_item]);
         }
 
         //获取英雄数据
-        $url        = 'http://pvp.qq.com/web201605/js/herolist.json';
-        $content    = CURL::get($url, 'pvp.qq.com');
-        $hero_items = json_decode($content, true);
+        $url          = 'http://wzry.duowan.com/yujivideo/index_2.html';
+        $page_content = CURL::get($url, parse_url($url, PHP_URL_HOST));
+        $page_content = mb_convert_encoding($page_content, 'utf-8', 'GBK,UTF-8,ASCII');
+        $html         = SimpleHtml::str_get_html($page_content);
 
-        foreach ($hero_items as $hero_item) {
+        $hero_nodes = $html->find('ul.list-hero li');
+
+        foreach ($hero_nodes as $hero_node) {
+            \Log::info($hero_node->innertext);
+            $hero_name = $hero_node->find('span.name', 0)->innertext;
+            if (!$hero_name) {
+                continue;
+            }
+
             //创建英雄
-            $hero = Hero::firstOrCreate(['name' => $hero_item['cname']]);
+            $hero = Hero::firstOrCreate(['name' => $hero_name]);
 
             //获取并保存图片到本地
             $image_url  = '/hero/' . time() . str_random(8) . '.png';
@@ -69,7 +83,7 @@ class InitHero extends Command
             if (!file_exists($dir)) {
                 mkdir($dir, 0755, true);
             }
-            $image_src = 'http://game.gtimg.cn/images/yxzj/img201606/heroimg/' . $hero_item['ename'] . '/' . $hero_item['ename'] . '.jpg';
+            $image_src = $hero_node->find('img', 0)->src;
             file_put_contents($image_path, file_get_contents($image_src));
 
             //保存图片数据
@@ -82,11 +96,18 @@ class InitHero extends Command
             $hero->image_id = $image->id;
             $hero->save();
 
+            $type_name_arr = [];
+            foreach (explode(' ', $hero_node->class) as $value) {
+                if (array_key_exists($value, $hero_type_items)) {
+                    $type_name_arr[] = $hero_type_items[$value];
+                }
+            }
+
             //查询英雄类型
-            $hero_type = HeroType::firstOrCreate(['name' => $hero_type_items[$hero_item['hero_type']]]);
+            $hero_type_id = HeroType::whereIn('name', $type_name_arr)->pluck('id')->all();
 
             //英雄与类型关联
-            $hero->heroType()->sync([$hero_type->id]);
+            $hero->heroType()->sync($hero_type_id);
 
         }
     }

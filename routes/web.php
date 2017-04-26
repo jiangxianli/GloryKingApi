@@ -1,52 +1,35 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
+//管理后台
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
+    //英雄操作
     Route::group(['prefix' => 'hero'], function () {
-        Route::get('/', ['as' => 'admin.hero', 'uses' => 'HeroController@getHeroList']);
-        Route::get('add', 'HeroController@getAddHero');
-        Route::post('add', 'HeroController@postAddHero');
-        Route::get('{id}/edit', 'HeroController@getEditHero');
-        Route::post('{id}/edit', 'HeroController@postEditHero');
+        Route::get('/', 'HeroController@getHeroList'); //英雄列表
+        Route::get('add', 'HeroController@getAddHero'); //添加英雄页面
+        Route::post('add', 'HeroController@postAddHero'); //添加英雄操作
+        Route::get('{id}/edit', 'HeroController@getEditHero'); //编辑英雄页面
+        Route::post('{id}/edit', 'HeroController@postEditHero'); //编辑英雄操作
     });
 
+    //素材操作
     Route::group(['prefix' => 'element'], function () {
-        Route::get('/', 'ElementController@getIndex');
-        Route::get('add', 'ElementController@getAddElement');
-        Route::post('add', 'ElementController@postAddElement');
-//        Route::get(、'{id}/edit', 'ElementController@getEditHero');
-//        Route::post('{id}/edit', 'ElementController@postEditHero');
+        Route::get('/', 'ElementController@getIndex'); //素材列表页面
+        Route::get('add', 'ElementController@getAddElement'); //添加素材页面
+        Route::post('add', 'ElementController@postAddElement'); //添加素材操作
+        Route::get('{id}/edit', 'ElementController@getEditElement'); //编辑素材页面
+        Route::post('{id}/edit', 'ElementController@postEditElement'); //编辑素材操作
     });
 
+    //英雄类型操作
     Route::group(['prefix' => 'hero-type'], function () {
-        Route::get('add', 'HeroTypeController@getAdd');
-        Route::post('add', 'HeroTypeController@postAdd');
+        Route::get('add', 'HeroTypeController@getAdd'); //添加英雄类型页面
+        Route::post('add', 'HeroTypeController@postAdd'); //添加英雄类型操作
     });
 
+    //通用工具
     Route::group(['prefix' => 'common'], function () {
-        Route::post('upload-image', 'CommonController@postUploadImage');
-        Route::post('parse-video-url', 'CommonController@postParseVideoUrl');
+        Route::post('upload-image', 'CommonController@postUploadImage'); //上传图片
+        Route::post('parse-video-url', 'CommonController@postParseVideoUrl'); //解析视频地址
     });
-});
-
-
-Route::get('test', function () {
-
-
 });

@@ -20,9 +20,8 @@ class ElementController extends Controller
     {
         $params = $request->all();
 
-        $element = AdminHandler::getElements(array_merge($params, ['by' => 'all']));
-
-//        dd($element);
+        $params['by'] = 'all';
+        $element      = AdminHandler::getElements($params);
 
         return view('admin.element.index', compact('element'));
     }
@@ -57,6 +56,49 @@ class ElementController extends Controller
         $params = $request->all();
 
         $response = AdminHandler::elementOperate($params, 'add');
+
+        return response()->json($response);
+    }
+
+    /**
+     * 编辑素材页面
+     *
+     * @param Request $request
+     * @param $element_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author jiangxianli
+     * @created_at 2017-04-26 10:40:06
+     */
+    public function getEditElement(Request $request, $element_id)
+    {
+        $params = $request->all();
+
+        $element = AdminHandler::getElements([
+            'by' => 'detail',
+            'id' => $element_id
+        ]);
+
+        $hero = AdminHandler::getHeroList(array_merge($params, ['by' => 'all_hero']));
+
+        return view('admin.element.edit', compact('hero', 'element'));
+    }
+
+    /**
+     * 更新素材
+     *
+     * @param Request $request
+     * @param $element_id
+     * @return \Illuminate\Http\JsonResponse
+     * @author jiangxianli
+     * @created_at 2017-04-26 10:45:32
+     */
+    public function postEditElement(Request $request, $element_id)
+    {
+        $params = $request->all();
+
+        $params['id'] = $element_id;
+
+        $response = AdminHandler::elementOperate($params, 'edit');
 
         return response()->json($response);
     }

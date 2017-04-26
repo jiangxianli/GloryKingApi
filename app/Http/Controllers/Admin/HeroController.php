@@ -24,7 +24,9 @@ class HeroController extends Controller
 
         $hero_type = AdminHandler::getAllHeroType($params);
 
-        $hero = AdminHandler::getHeroList(array_merge($params, ['by' => 'type_id']), 'type_id');
+        $params['per_page'] = array_get($params, 'per_page', 12);
+        $params['by']       = 'type_id';
+        $hero               = AdminHandler::getHeroList($params, 'type_id');
 
         return view('admin.hero.index', compact('hero_type_id', 'hero_type', 'hero'));
     }
