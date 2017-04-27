@@ -299,6 +299,7 @@ class ComposerStaticInitb2aae401a58f2b4deef127c9ea97778f
     );
 
     public static $classMap = array (
+        'AddDurationToElementTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_27_073212_add_duration_to_element_table.php',
         'AddFromUrlToElementTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_25_125940_add_from_url_to_element_table.php',
         'CreateTableWzElementTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_20_060736_create_table_wz_element_table.php',
         'CreateTableWzHeroTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_20_055747_create_table_wz_hero_table.php',

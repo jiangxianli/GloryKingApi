@@ -34,7 +34,8 @@ class Element extends Base
         'hero_id',
         'image_id',
         'sort',
-        'disabled'
+        'disabled',
+        'duration'
     ];
 
     /**

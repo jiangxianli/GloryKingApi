@@ -9,6 +9,9 @@ $(function () {
 
             //视频地址解析
             this.parseUrl();
+
+            //解析视频长度
+            this.parseDuration();
         },
 
         //提交表单
@@ -81,6 +84,26 @@ $(function () {
                 });
             });
 
+        },
+        parseDuration: function () {
+
+            $('video').change(function () {
+                var video = document.getElementById('element-video');//获取video元素
+                var duration = video.duration;
+                if (duration > 0) {
+                    $('.parse-duration-group input[type=text]').val($.formatDurationTime(duration));
+                    $('.parse-duration-group input[type=hidden]').val(duration)
+                }
+            });
+
+            $('.parse-duration-group button').click(function () {
+                var video = document.getElementById('element-video');//获取video元素
+                var duration = video.duration;
+                if (duration > 0) {
+                    $('.parse-duration-group input[type=text]').val($.formatDurationTime(duration));
+                    $('.parse-duration-group input[type=hidden]').val(duration)
+                }
+            })
         }
     };
 

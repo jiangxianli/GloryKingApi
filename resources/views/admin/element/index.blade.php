@@ -15,6 +15,7 @@
                     <button class="btn btn-sm btn-default">批量操作</button>
                     <a href="{{ action('Admin\ElementController@getAddElement') }}"
                        class="btn btn-sm btn-default">新增视频</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default btn-batch-duration">视频时长</a>
                 </div>
                 <div class="col-sm-4 m-b-xs">
                     {{--<div class="btn-group" data-toggle="buttons">--}}
@@ -64,7 +65,7 @@
                             <td><label class="checkbox m-n i-checks"><input type="checkbox"
                                                                             name="post[]"><i></i></label></td>
                             <td>{{ $item->title }}</td>
-                            <td>{{ $item->url }}</td>
+                            <td class="url-column" data-id="{{ $item->id }}">{{ $item->url }}</td>
                             <td>{{ $item->hero->name }}</td>
                             <td>{{ $item->play_num }}</td>
                             <td>{{ $item->created_at }}</td>
@@ -113,6 +114,7 @@
 
     <script>
         $(function () {
+            var setDurationUrl = "{{ action('Admin\ElementController@setElementDuration') }}";
             //图片上传
             $.uploadImg($('.upload-file-container'), {
                 'uploadUrl': "{{ action("Admin\CommonController@postUploadImage") }}",
@@ -120,6 +122,26 @@
                     _token: $('meta[name=csrf-token]').attr('value')
                 }
             });
+
+            $('.btn-batch-duration').click(function () {
+                $('.url-column').each(function () {
+                    var _this = $(this);
+                    var url = _this.html();
+                    var id = _this.data('id')
+
+                    var video = new Audio(url);
+                    video.addEventListener('loadeddata', function () {
+                        $.ajaxFun(setDurationUrl, 'POST', {
+                            id: id,
+                            duration: video.duration,
+                        }, function () {
+
+                        });
+                    });
+                })
+
+
+            })
         });
     </script>
 @stop

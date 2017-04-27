@@ -63,57 +63,64 @@ $(function () {
         },
 
         //上传图片
-        uploadImg:function(element , options){
+        uploadImg: function (element, options) {
             //默认配置
             var _default = {
-                uploadUrl:'',
-                uploadParams:{},
-                uploadExtensions:['jpg','png','gif'],
-                defaultUrl:'',
-                defaultId:0,
+                uploadUrl: '',
+                uploadParams: {},
+                uploadExtensions: ['jpg', 'png', 'gif'],
+                defaultUrl: '',
+                defaultId: 0,
             };
 
-            _default = $.extend(_default,options);
+            _default = $.extend(_default, options);
 
-            var version = 'upload-'+(new Date()).getTime();
+            var version = 'upload-' + (new Date()).getTime();
             //上传器元素添加到对应容器中
-            var html = $('<div class="upload-container '+version+'">'+
-                '<div class="upload-image">'+
-                ( _default.defaultUrl ? ('<img src="'+_default.defaultUrl+'" />') : '' ) +
-                '</div>'+
-                '<input type="hidden" name="image_id" value="'+_default.defaultId+'" /> '+
-                '<div class="upload-tool">'+
-                '<button class="btn btn-success pull-left col-sm-12 upload-btn"><input type="file" name="file">上传</input></button>'+
+            var html = $('<div class="upload-container ' + version + '">' +
+                '<div class="upload-image">' +
+                ( _default.defaultUrl ? ('<img src="' + _default.defaultUrl + '" />') : '' ) +
+                '</div>' +
+                '<input type="hidden" name="image_id" value="' + _default.defaultId + '" /> ' +
+                '<div class="upload-tool">' +
+                '<button class="btn btn-success pull-left col-sm-12 upload-btn"><input type="file" name="file">上传</input></button>' +
                 // '<button class="btn btn-danger pull-right col-sm-6 hidden delete-btn">删除</button>'+
-                '</div>'+
+                '</div>' +
                 '</div>');
             element.html(html);
 
             //上传监听
             html.find('.upload-btn input[type=file]').ajaxfileupload({
                 action: _default.uploadUrl,
-                valid_extensions : _default.uploadExtensions,
+                valid_extensions: _default.uploadExtensions,
                 params: _default.uploadParams,
-                onComplete: function(response) {
+                onComplete: function (response) {
                     // response = JSON.stringify(response);
                     console.log(response)
-                    if(response.code == 0){
+                    if (response.code == 0) {
                         console.log('test')
-                        html.find('.upload-image').html('<img src="'+response.data.url+'" />');
+                        html.find('.upload-image').html('<img src="' + response.data.url + '" />');
                         html.find('input[name=image_id]').val(response.data.id);
                         // html.find('.delete-btn').removeClass('hidden');
                         // html.find('.upload-btn').removeClass('col-sm-12').addClass('col-sm-6');
                     }
                 },
-                onStart: function() {
+                onStart: function () {
 
                 },
-                onCancel: function() {
+                onCancel: function () {
                     console.log('no file selected');
                 }
             });
 
 
+        },
+
+        formatDurationTime: function (duration) {
+            var duration = parseInt(duration);
+            var minutes = parseInt(duration / 60);
+            var seconds = parseInt(duration % 60);
+            return (minutes < 10 ? '0' + minutes : minutes ) + ':' + (seconds < 10 ? '0' + seconds : seconds);
         }
     });
 });

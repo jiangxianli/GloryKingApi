@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddDurationToElementTable' => $baseDir . '/database/migrations/2017_04_27_073212_add_duration_to_element_table.php',
     'AddFromUrlToElementTable' => $baseDir . '/database/migrations/2017_04_25_125940_add_from_url_to_element_table.php',
     'CreateTableWzElementTable' => $baseDir . '/database/migrations/2017_04_20_060736_create_table_wz_element_table.php',
     'CreateTableWzHeroTable' => $baseDir . '/database/migrations/2017_04_20_055747_create_table_wz_hero_table.php',

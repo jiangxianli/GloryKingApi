@@ -81,6 +81,22 @@
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
+                            <label class="col-sm-2 control-label">播放时长</label>
+                            <div class="col-sm-2">
+                                <div class="input-group parse-duration-group">
+                                    <input type="text" class="form-control" data-required="true" readonly
+                                           placeholder="请检测播放时长"
+                                           data-error-message="请检测播放时长"
+                                    >
+                                    <input type="hidden" name="duration" value="0">
+                                    <span class="input-group-btn">
+                                           <button class="btn btn-default " type="button">检索</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
                             <label class="col-sm-2 control-label">排序值</label>
                             <div class="col-sm-4">
                                 <input type="number" value="0" name="sort" min="0" max="1000" data-type="number"

@@ -102,4 +102,21 @@ class ElementController extends Controller
 
         return response()->json($response);
     }
+
+    /**
+     * 设置视频时长
+     *
+     * @param Request $request
+     * @return \Library\ErrorMessage\ErrorMessage|mixed
+     * @author jiangxianli
+     * @created_at 2017-04-27 16:56:01
+     */
+    public function setElementDuration(Request $request)
+    {
+        $params = $request->all();
+
+        $response = AdminHandler::elementOperate($params, 'set_duration');
+
+        return $response;
+    }
 }

@@ -83,6 +83,12 @@ class ElementBase extends Base
     {
         $elements = Element::orderBy('created_at', 'desc');
 
+        $duration = array_get($condition, 'duration', 0);
+
+        if ($duration) {
+            $elements = $elements->where('duration', 0);
+        }
+
         $elements = self::page($elements, $condition);
 
         return $elements;
@@ -147,6 +153,19 @@ class ElementBase extends Base
     public static function incrementByColumn($unique_id, $column)
     {
         Element::where('unique_id', $unique_id)->increment($column);
+    }
+
+    /**
+     * 设置视频时长
+     *
+     * @param $id
+     * @param $duration
+     * @author jiangxianli
+     * @created_at 2017-04-27 16:23:50
+     */
+    public static function setDuration($id, $duration)
+    {
+        Element::where('id', $id)->update(['duration' => $duration]);
     }
 
     /**

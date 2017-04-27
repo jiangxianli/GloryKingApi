@@ -48,6 +48,7 @@ class ApiHandler extends Handler
                         'poster'    => $item->image ? Helper::fullUrl($item->image->url) : '',
                         'play_num'  => $item->play_num,
                         'raise_num' => $item->raise_num,
+                        'duration'  => Helper::formatDurationTime($item->duration)
                     ];
                 });
 
@@ -69,6 +70,7 @@ class ApiHandler extends Handler
                         'poster'    => $response->image ? Helper::fullUrl($response->image->url) : '',
                         'play_num'  => $response->play_num,
                         'raise_num' => $response->raise_num,
+                        'duration'  => Helper::formatDurationTime($response->duration)
                     ];
                 }
                 break;

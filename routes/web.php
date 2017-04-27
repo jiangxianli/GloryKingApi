@@ -19,6 +19,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
         Route::post('add', 'ElementController@postAddElement'); //添加素材操作
         Route::get('{id}/edit', 'ElementController@getEditElement'); //编辑素材页面
         Route::post('{id}/edit', 'ElementController@postEditElement'); //编辑素材操作
+        Route::post('set-duration', 'ElementController@setElementDuration'); //设置视频时长
     });
 
     //英雄类型操作

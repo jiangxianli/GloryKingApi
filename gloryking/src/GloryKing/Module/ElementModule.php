@@ -96,6 +96,11 @@ class ElementModule extends Module
                 $unique_id = array_get($condition, 'unique_id', 0);
                 return ElementBase::incrementByColumn($unique_id, 'raise_num');
                 break;
+            case 'set_duration':
+                $id       = array_get($condition, 'id', 0);
+                $duration = array_get($condition, 'duration', 0);
+                return ElementBase::setDuration($id, $duration);
+                break;
         }
     }
 }

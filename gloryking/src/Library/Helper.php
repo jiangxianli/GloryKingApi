@@ -34,4 +34,20 @@ class Helper
         $uuid .= substr($str, 20, 12);
         return ($prefix ? $prefix . '_' : '') . $uuid;
     }
+
+    /**
+     * 格式化显示视频时长
+     *
+     * @param $duration
+     * @return string
+     * @author jiangxianli
+     * @created_at 2017-04-27 15:37:13
+     */
+    public static function formatDurationTime($duration)
+    {
+        $minutes = intval($duration / 60);
+        $seconds = intval($duration % 60);
+
+        return ($minutes < 10 ? '0' . $minutes : $minutes) . ':' . ($seconds < 10 ? '0' . $seconds : $seconds);
+    }
 }

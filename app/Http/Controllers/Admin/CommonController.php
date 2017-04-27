@@ -35,4 +35,9 @@ class CommonController extends Controller
 
         return ApiHandler::parseVideoUrl($from_url);
     }
+
+    public function postParseDuration(Request $request)
+    {
+
+    }
 }

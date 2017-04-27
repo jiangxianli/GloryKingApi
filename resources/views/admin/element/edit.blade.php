@@ -6,7 +6,7 @@
             <div class="m-b-md">
                 <h3 class="m-b-none">编辑视频</h3>
             </div>
-            <form class="form-horizontal" data-validate="parsley" id="add-element-form"
+            <form class="form-horizontal" data-validate="parsley" id="edit-element-form"
                   action="{{ action('Admin\ElementController@postEditElement',[$element->id]) }}" method="POST">
                 <section class="panel panel-default">
                     <header class="panel-heading">
@@ -65,7 +65,7 @@
 
                         </div>
                         <div class="col-sm-5 video-player">
-                            <video width="320" height="240" controls="controls"
+                            <video id="element-video" width="320" height="240" controls="controls"
                                    src="{{ $element->url }}"
                                    poster="{{ $element->image ? \Library\Helper::fullUrl($element->image->url) : '' }}"
                                    preload="auto"
@@ -84,6 +84,23 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">播放时长</label>
+                        <div class="col-sm-2">
+                            <div class="input-group parse-duration-group">
+                                <input type="text" class="form-control" data-required="true" readonly
+                                       placeholder="请检测播放时长"
+                                       data-error-message="请检测播放时长"
+                                       value="{{ $element->duration ? \Library\Helper::formatDurationTime($element->duration) :'' }}"
+                                >
+                                <input type="hidden" name="duration" value="{{ $element->duration }}">
+                                <span class="input-group-btn">
+                                       <button class="btn btn-default " type="button">检索</button>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">排序值</label>
                         <div class="col-sm-4">
                             <input value="{{ $element->sort }}" type="number" value="0" name="sort" min="0" max="1000"
@@ -96,7 +113,6 @@
                         <div class="col-sm-4 ">
                             <button type="submit" class="btn btn-success btn-s-xs">确定</button>
                         </div>
-                    </div>
                     </div>
                 </section>
             </form>
