@@ -33,11 +33,17 @@ $(function () {
                     var method = form.attr('method');
                     //请求参数
                     var params = {};
+
+                    var element_id_arr = [];
                     $.each(form.serializeArray(), function () {
-                        params[this.name] = this.value;
+                        if (this.name == 'element_id[]') {
+                            element_id_arr.push(this.value)
+                        } else {
+                            params[this.name] = this.value;
+                        }
                     });
                     params.disabled = params.disabled == 'on' ? 0 : 1; //disabled参数值转换
-
+                    params.element_id = element_id_arr;
 
                     var image_id = $('.upload-file-container input[name=image_id]').val();
                     params.image_id = image_id;

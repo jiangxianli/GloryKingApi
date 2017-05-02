@@ -4,13 +4,13 @@
     <section class="vbox">
         <section class="scrollable padder">
             <div class="m-b-md">
-                <h3 class="m-b-none">添加专题</h3>
+                <h3 class="m-b-none">编辑专题</h3>
             </div>
             <form class="form-horizontal" data-validate="parsley" id="edit-theme-form"
                   action="{{ action('Admin\ThemeController@postEditTheme',[$theme->id]) }}" method="POST">
                 <section class="panel panel-default">
                     <header class="panel-heading">
-                        <strong>添加专题</strong>
+                        <strong>编辑专题</strong>
                     </header>
                     <div class="panel-body">
                         <div class="form-group">
