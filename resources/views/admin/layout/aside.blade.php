@@ -22,8 +22,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ action('Admin\ElementController@getIndex') }}" data-target="#content"
-                               data-el="#bjax-el" data-replace="true">
+                            <a href="{{ action('Admin\ElementController@getIndex') }}">
                                 <i class="icon-social-youtube icon  text-primary"></i>
                                 <span class="font-bold">视频管理</span>
                             </a>
