@@ -81,7 +81,7 @@ $(function () {
                             '<td>' + title + '</td>' +
                             '<td>' +
                             '<div class="btn-group">' +
-                            '<input type="hidden" name="element_id" value="' + id + '" />' +
+                            '<input type="hidden" name="element_id[]" value="' + id + '" />' +
                             '<button class="btn btn-default btn-sm">操作</button>' +
                             '<button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>' +
                             '<ul class="dropdown-menu">' +

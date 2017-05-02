@@ -59,7 +59,7 @@
                                                     <td>{{ $element->title }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <input type="hidden" name="element_id"
+                                                            <input type="hidden" name="element_id[]"
                                                                    value="{{ $element->id }}">
                                                             <button class="btn btn-default btn-sm">操作</button>
                                                             <button class="btn btn-default btn-sm dropdown-toggle"
