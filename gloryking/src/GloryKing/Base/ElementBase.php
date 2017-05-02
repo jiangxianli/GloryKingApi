@@ -81,12 +81,17 @@ class ElementBase extends Base
      */
     public static function getAllElement($condition = [])
     {
-        $elements = Element::orderBy('created_at', 'desc');
+        $elements = Element::with('image')->orderBy('created_at', 'desc');
 
         $duration = array_get($condition, 'duration', 0);
+        $title    = array_get($condition, 'title', '');
 
         if ($duration) {
             $elements = $elements->where('duration', 0);
+        }
+
+        if ($title) {
+            $elements = $elements->where('title', 'like', '%' . $title . '%');
         }
 
         $elements = self::page($elements, $condition);

@@ -27,6 +27,24 @@ class ElementController extends Controller
     }
 
     /**
+     * 搜索元素列表
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @author jiangxianli
+     * @created_at 2017-04-28 13:36:25
+     */
+    public function searchElement(Request $request)
+    {
+        $params = $request->all();
+
+        $params['by'] = 'all';
+        $response     = AdminHandler::searchElement($params);
+
+        return response()->json($response);
+    }
+
+    /**
      * 添加元素页面
      *
      * @param Request $request

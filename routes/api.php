@@ -30,4 +30,9 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/', 'ElementController@postElementList'); //素材列表
         Route::post('operate', 'ElementController@postElementOperate'); //素材操作
     });
+
+    //专题相关接口
+    Route::group(['prefix' => 'theme'], function () {
+        Route::get('/', 'ThemeController@postThemeList'); //素材列表
+    });
 });

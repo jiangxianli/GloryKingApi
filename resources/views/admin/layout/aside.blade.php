@@ -9,31 +9,18 @@
                         <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
                             菜单
                         </li>
-                        {{--<li>--}}
-                        {{--<a href="index.html">--}}
-                        {{--<i class="icon-disc icon text-success"></i>--}}
-                        {{--<span class="font-bold">What's new</span>--}}
-                        {{--</a>--}}
-                        </li>
                         <li>
                             <a href="{{ action('Admin\HeroController@getHeroList') }}">
                                 <i class="icon-game-controller icon text-info"></i>
                                 <span class="font-bold">英雄管理</span>
                             </a>
                         </li>
-                        {{--<li>--}}
-                        {{--<a href="events.html">--}}
-                        {{--<i class="icon-drawer icon text-primary-lter"></i>--}}
-                        {{--<b class="badge bg-primary pull-right">6</b>--}}
-                        {{--<span class="font-bold">Events</span>--}}
-                        {{--</a>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                        {{--<a href="listen.html">--}}
-                        {{--<i class="icon-list icon  text-info-dker"></i>--}}
-                        {{--<span class="font-bold">Listen</span>--}}
-                        {{--</a>--}}
-                        {{--</li>--}}
+                        <li>
+                            <a href="{{ action('Admin\ThemeController@getIndex') }}">
+                                <i class="icon-list icon  text-info-dker"></i>
+                                <span class="font-bold">专题管理</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="{{ action('Admin\ElementController@getIndex') }}" data-target="#content"
                                data-el="#bjax-el" data-replace="true">

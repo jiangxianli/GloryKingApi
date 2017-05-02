@@ -14,6 +14,8 @@ return array(
     'CreateTableWzHeroTypeTable' => $baseDir . '/database/migrations/2017_04_20_060354_create_table_wz_hero_type_table.php',
     'CreateTableWzImageTable' => $baseDir . '/database/migrations/2017_04_20_060154_create_table_wz_image_table.php',
     'CreateWzAdminTable' => $baseDir . '/database/migrations/2017_04_26_085229_create_wz_admin_table.php',
+    'CreateWzThemeElementTable' => $baseDir . '/database/migrations/2017_04_28_030845_create_wz_theme_element_table.php',
+    'CreateWzThemeTable' => $baseDir . '/database/migrations/2017_04_28_030421_create_wz_theme_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',

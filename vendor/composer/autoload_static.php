@@ -307,6 +307,8 @@ class ComposerStaticInitb2aae401a58f2b4deef127c9ea97778f
         'CreateTableWzHeroTypeTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_20_060354_create_table_wz_hero_type_table.php',
         'CreateTableWzImageTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_20_060154_create_table_wz_image_table.php',
         'CreateWzAdminTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_26_085229_create_wz_admin_table.php',
+        'CreateWzThemeElementTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_28_030845_create_wz_theme_element_table.php',
+        'CreateWzThemeTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_28_030421_create_wz_theme_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',

@@ -4,6 +4,7 @@ namespace GloryKing\Handler;
 use GloryKing\Module\AdminModule;
 use GloryKing\Module\ElementModule;
 use GloryKing\Module\HeroModule;
+use GloryKing\Module\ThemeModule;
 use Library\ErrorMessage\ErrorMessage;
 
 /**
@@ -98,6 +99,21 @@ class AdminHandler extends Handler
     }
 
     /**
+     * 搜索元素列表
+     *
+     * @param $condition
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-28 13:38:43
+     */
+    public static function searchElement($condition)
+    {
+        $response = ElementModule::getElements($condition);
+
+        return self::apiResponse($response);
+    }
+
+    /**
      * 管理员登录
      *
      * @param $condition
@@ -114,5 +130,34 @@ class AdminHandler extends Handler
         }
 
         return self::apiResponse($response);
+    }
+
+    /**
+     * 专题操作
+     *
+     * @param $condition
+     * @param $operate
+     * @return array
+     * @author jiangxianli
+     * @created_at 2017-04-28 11:41:26
+     */
+    public static function themeOperate($condition, $operate)
+    {
+        $response = ThemeModule::themeOperate($condition, $operate);
+
+        return self::apiResponse($response);
+    }
+
+    /**
+     * 获取专题列表
+     *
+     * @param $condition
+     * @return ErrorMessage|mixed
+     * @author jiangxianli
+     * @created_at 2017-04-28 11:58:30
+     */
+    public static function getThemeList($condition)
+    {
+        return ThemeModule::getThemeList($condition);
     }
 }

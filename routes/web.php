@@ -20,12 +20,22 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
         Route::get('{id}/edit', 'ElementController@getEditElement'); //编辑素材页面
         Route::post('{id}/edit', 'ElementController@postEditElement'); //编辑素材操作
         Route::post('set-duration', 'ElementController@setElementDuration'); //设置视频时长
+        Route::post('search', 'ElementController@searchElement'); //搜索素材
     });
 
     //英雄类型操作
     Route::group(['prefix' => 'hero-type'], function () {
         Route::get('add', 'HeroTypeController@getAdd'); //添加英雄类型页面
         Route::post('add', 'HeroTypeController@postAdd'); //添加英雄类型操作
+    });
+
+    //专题操作
+    Route::group(['prefix' => 'theme'], function () {
+        Route::get('/', 'ThemeController@getIndex'); //专题列表页面
+        Route::get('add', 'ThemeController@getAddTheme'); //添加专题页面
+        Route::post('add', 'ThemeController@postAddTheme'); //添加专题操作
+        Route::get('{id}/edit', 'ThemeController@getEditTheme'); //编辑专题页面
+        Route::post('{id}/edit', 'ThemeController@postEditTheme'); //编辑专题操作
     });
 
     //通用工具

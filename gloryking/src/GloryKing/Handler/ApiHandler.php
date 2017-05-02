@@ -4,6 +4,7 @@ namespace GloryKing\Handler;
 use GloryKing\Module\CommonModule;
 use GloryKing\Module\ElementModule;
 use GloryKing\Module\HeroModule;
+use GloryKing\Module\ThemeModule;
 use Illuminate\Support\Collection;
 use Library\ErrorMessage\ErrorMessage;
 use Library\Helper;
@@ -224,6 +225,52 @@ class ApiHandler extends Handler
             case 'add_play_num':
             case 'add_raise_num':
                 $response = ElementModule::elementOperate($condition, $by);
+                break;
+            default:
+                $response = new ErrorMessage('2003');
+                break;
+        }
+
+        return self::apiResponse($response);
+    }
+
+    /**
+     * 获取专题列表
+     *
+     * @param array $condition
+     * @return array|ErrorMessage|mixed
+     * @author jiangxianli
+     * @created_at 2017-05-02 11:35:06
+     */
+    public static function getThemeList($condition = [])
+    {
+        $by = array_get($condition, 'by', '');
+        switch ($by) {
+            case 'enabled':
+                $response = ThemeModule::getThemeList($condition);
+                if (ErrorMessage::isError($response)) {
+                    return self::apiResponse($response);
+                }
+                $response->transform(function ($item) {
+                    return [
+                        'theme_id'        => $item->id,
+                        'name'            => $item->name,
+                        'theme_image_url' => $item->image ? Helper::fullUrl($item->image->url) : '',
+                        'elements'        => $item->element->map(function ($item) {
+                            return [
+                                'unique_id' => $item->unique_id,
+                                'url'       => $item->url,
+                                'hero_id'   => $item->hero_id,
+                                'title'     => $item->title,
+                                'poster'    => $item->image ? Helper::fullUrl($item->image->url) : '',
+                                'play_num'  => $item->play_num,
+                                'raise_num' => $item->raise_num,
+                                'duration'  => Helper::formatDurationTime($item->duration)
+                            ];
+                        })
+                    ];
+                });
+
                 break;
             default:
                 $response = new ErrorMessage('2003');
