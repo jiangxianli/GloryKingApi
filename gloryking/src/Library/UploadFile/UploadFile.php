@@ -192,7 +192,12 @@ class UploadFile
 
         $file_name = time() . str_random(10) . '.' . $extension;
 
-        $file->move(public_path($upload_dir), $file_name);
+        $dir_name = public_path($upload_dir);
+        if (!file_exists($dir_name)) {
+            mkdir($dir_name, 0755, true);
+        }
+
+        $file->move($dir_name, $file_name);
         $this->file_url  = str_replace('//', '/', '/' . $upload_dir . '/' . $file_name);
         $this->file_path = public_path($upload_dir . '/' . $file_name);
     }

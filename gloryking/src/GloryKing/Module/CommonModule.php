@@ -1,6 +1,7 @@
 <?php
 namespace GloryKing\Module;
 
+use Carbon\Carbon;
 use GloryKing\Base\ImageBase;
 use Library\ErrorMessage\ErrorMessage;
 use Library\SimpleHtml\CURL;
@@ -28,9 +29,9 @@ class CommonModule extends Module
     public static function uploadImage($file)
     {
         //初始化上传器
-        $upload = new UploadFile(['jpg', 'png'], 20 * 1024);
+        $upload = new UploadFile(['jpg', 'png'], 5 * 1024 * 1000);
         //上传文件
-        $file = $upload->upload($file, 'hero');
+        $file = $upload->upload($file, Carbon::now()->format('Y-m-d'));
 
         //错误校验
         if (ErrorMessage::isError($file)) {
