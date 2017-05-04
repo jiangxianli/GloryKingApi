@@ -24,7 +24,7 @@
                             <label class="col-sm-2 control-label">是否启用</label>
                             <div class="col-sm-10">
                                 <label class="switch">
-                                    <input type="checkbox" name="disabled" checked data-required="true">
+                                    <input type="checkbox" name="disabled" checked >
                                     <span></span>
                                 </label>
                             </div>

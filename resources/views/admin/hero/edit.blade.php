@@ -33,7 +33,7 @@
                             <div class="col-sm-10">
                                 <label class="switch">
                                     <input type="checkbox" name="disabled"
-                                           {{ $hero->disabled == 1 ? 'checked' : '' }} data-required="true">
+                                           {{ $hero->disabled == 1 ? 'checked' : '' }} >
                                     <span></span>
                                 </label>
                             </div>

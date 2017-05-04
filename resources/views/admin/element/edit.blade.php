@@ -77,7 +77,7 @@
                         <div class="col-sm-10">
                             <label class="switch">
                                 <input type="checkbox" name="disabled" checked
-                                       data-required="true" {{ $element->disabled == 0 ? 'checked' : '' }}>
+                                       {{ $element->disabled == 0 ? 'checked' : '' }}>
                                 <span></span>
                             </label>
                         </div>
