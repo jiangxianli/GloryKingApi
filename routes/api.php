@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
-Route::group(['namespace' => 'Api'], function () {
+Route::group(['namespace' => 'Api', 'middleware' => 'api_visit_log'], function () {
 
     //英雄相关接口
     Route::group(['prefix' => 'hero'], function () {
