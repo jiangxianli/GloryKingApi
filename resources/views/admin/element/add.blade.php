@@ -67,7 +67,7 @@
 
                             </div>
                             <div class="col-sm-5 video-player hidden">
-                                <video width="400" height="180" controls="controls"></video>
+                                <video width="400" height="180" controls="controls" id="element-video"></video>
                             </div>
                         </div>
                         <div class="form-group">
