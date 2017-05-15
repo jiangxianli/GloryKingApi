@@ -37,7 +37,7 @@ class ApiVisitLog
         $user_agent = $request->server('HTTP_USER_AGENT');
 
         //是否第一次访问
-        $first_access_flag = Cookie::get('m_last_visit_time') ? 1 : 0;
+        $first_access_flag = Cookie::get('m_last_visit_time') ? 0 : 1;
 
         $log = '[' . $now . '] ' . json_encode(compact('now', 'ip', 'url', 'method', 'http_referer', 'user_agent', 'first_access_flag'), JSON_UNESCAPED_UNICODE);
 
