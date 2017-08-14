@@ -103,6 +103,18 @@ class CommonModule extends Module
             $title_node = $html->find('#container .art-title', 0);
             $title_node = $title_node ? $title_node : $html->find('.article-content .article-title', 0);
             $title      = $title_node ? $title_node->innertext : '';
+
+
+            if(!$url){
+                $video_id = $html->find('.article-text[id^=video_]');
+                $video_id = $video_id ? str_replace('video_','',$video_id->id) : '';
+
+                if ($video_id) {
+                    $info_url = 'http://video.duowan.cn/play/' . $video_id . '.html';
+                    return self::parseVideoUrl($info_url);
+                }
+            }
+
         } else {
             return new ErrorMessage('12001');
         }

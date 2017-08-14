@@ -19,7 +19,7 @@ class CURL
      * @author jiangxianli
      * @created_at 2017-04-25 13:31:13
      */
-    public static function get($url, $host = null)
+    public static function get($url, $host = null , $headers = [])
     {
         //初始化curl
         $ch = curl_init();
@@ -30,8 +30,11 @@ class CURL
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        if ($host) {
-            curl_setopt($ch, CURLOPT_HTTPHEADER, ['host'=>$host]);
+        if ($host || $headers) {
+            if($host){
+                $headers['host'] = $host;
+            }
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/" . self::randomIp() . " Mobile Safari/537.36");
 //        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/" . self::randomIp() . " Safari/536.11");
