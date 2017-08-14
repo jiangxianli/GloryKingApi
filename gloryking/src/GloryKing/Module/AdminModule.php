@@ -47,7 +47,7 @@ class AdminModule extends Module
 
         //密码校验
         if (!\Hash::check($password, $admin->password)) {
-            return new ErrorMessage('13000');
+            return new ErrorMessage('13001');
         }
 
         return $admin;

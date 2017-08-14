@@ -8,6 +8,7 @@ use GloryKing\Model\Image;
 use GloryKing\Module\CommonModule;
 use Illuminate\Console\Command;
 use Library\ErrorMessage\ErrorMessage;
+use Library\Helper;
 use Library\SimpleHtml\CURL;
 use Library\SimpleHtml\SimpleHtml;
 
@@ -111,6 +112,7 @@ class InitElement extends Command
                     $element->image_id = $image ? $image->id : 0;
                     $element->disabled = 0;
                     $element->sort     = 1;
+                    $element->unique_id = Helper::uuid('v');
                     $element->save();
 
                     \Log::info($element);
