@@ -106,7 +106,7 @@ class CommonModule extends Module
 
 
             if(!$url){
-                $video_id = $html->find('.article-text[id^=video_]');
+                $video_id = $html->find('.article-text div[id^=video_]',0);
                 $video_id = $video_id ? str_replace('video_','',$video_id->id) : '';
 
                 if ($video_id) {
